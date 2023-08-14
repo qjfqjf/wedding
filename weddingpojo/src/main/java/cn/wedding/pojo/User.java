@@ -1,5 +1,6 @@
 package cn.wedding.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@TableName("sys_user")
 public class User implements Serializable {
     private String id;
     private String userName;

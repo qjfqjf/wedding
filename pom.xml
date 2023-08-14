@@ -111,6 +111,7 @@
             <version>0.9.1</version>
         </dependency>
 
+        <!--这个依赖在jjwt的依赖中已经没了，需要添加进来-->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
