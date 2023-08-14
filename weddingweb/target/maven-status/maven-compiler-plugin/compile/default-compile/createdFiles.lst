@@ -1,0 +1,10 @@
+cn\wedding\exception\SysException.class
+cn\wedding\config\MinioConfig.class
+cn\wedding\config\CorsConfig.class
+cn\wedding\config\MyBatisPlusConfig.class
+cn\wedding\config\SwaggerConfig.class
+cn\wedding\controller\ImageController.class
+cn\wedding\config\SpringMvcConfig.class
+cn\wedding\controller\WedInfoController.class
+cn\wedding\WeddingcontrollerApplication.class
+cn\wedding\exception\GlobalException.class

@@ -1,0 +1,11 @@
+cn\wedding\dao\VideoDao.class
+cn\wedding\dao\WedInfoDao.class
+cn\wedding\dao\MinisterDao.class
+cn\wedding\dao\PictureDao.class
+cn\wedding\dao\PictureTypeDao.class
+cn\wedding\dao\JiGouDao.class
+cn\wedding\dao\WeddingDao.class
+cn\wedding\dao\ImageDao.class
+cn\wedding\dao\CityDao.class
+cn\wedding\dao\UserDao.class
+cn\wedding\dao\VideoTypeDao.class

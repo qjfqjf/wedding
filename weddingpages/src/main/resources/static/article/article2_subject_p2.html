@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>专题策划-资讯-婚礼风尚</title>
+    <base href="http://localhost:8081/">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/jquery.bxslider3.css">
+    <script  src="/js/jquery.nice-select.min.js"></script>
+    <script  src="/js/jquery.js"></script>
+</head>
+<body>
+<body>
+<div id="container">
+    <div class="topcontainer">
+        <div class="top">
+            <div class="site">
+                <select id="select-site" class="nice-select" style="display: none;">
+                    <option value="main">全国</option>
+
+                </select><div class="nice-select" tabindex="0"><span class="current">全国</span><ul class="list"><li data-value="main" class="option selected">全国</li></ul></div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/" id="m_home" class="s_home">首页</a></li>
+                    <li><a href="/articles" id="m_article" class="s_article active">资讯</a></li>
+                    <li><a href="/pictures" id="m_pic" class="s_pic">婚礼图片</a></li>
+                    <li><a href="/videos" id="m_video" class="s_video">婚礼视频</a></li>
+                    <li><a href="/jigou" id="m_jg" class="s_jg">婚礼机构</a></li>
+                    <li><a href="/daren" id="m_daren" class="s_daren">婚礼人</a></li>
+                </ul>
+            </div>
+            <form class="search-form" id="searchForm">
+
+                <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+                <div class="search-btn"><button><img src="/images/search.png"></button></div>
+            </form>
+            <div class="login" id="userstatus"><a href="/login">登录</a><a href="/register" style="margin:0 0 0 12px;">注册</a></div>
+            <div class="follow">
+                <a href="http://weibo.com/weddingvogue" target="_blank" title="婚礼风尚新浪微博"><img src="/images/icon1.jpg" width="18" height="21" alt="新浪微博"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="headcontainer">
+        <div class="head">
+            <div class="logo"><a href="/" class="s_home" title="婚礼风尚"><img src="/images/nlogo.jpg" width="200" height="82" alt="婚礼风尚"></a></div>
+            <div class="headbanner">
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            if (!$.cookie('site_id') || ($.cookie('site_id') && $.cookie('site_id') !== '1')) {
+                $.cookie('site_id', '1', { expires: 100, path: '/' });
+                $.cookie('site_name', '主站', { expires: 100, path: '/' });
+                $.cookie('site_city_id', '0', { expires: 100, path: '/' });
+                $.cookie('site_site_name', '', { expires: 100, path: '/' });
+            }
+
+            var siteCityId = $.cookie('site_city_id');
+            var siteName = $.cookie('site_site_name');
+            if (siteName && siteCityId) {
+                var sitePath = "c/" + siteName + "/";
+                $('.s_article').attr('href', '\/'+ sitePath +'articles');
+                $('.s_pic').attr('href', '\/'+ sitePath +'pictures');
+                $('.s_video').attr('href', '\/'+ sitePath +'videos');
+                $('.s_jg').attr('href', '\/jigou-city/' + siteCityId);
+                $('.s_daren').attr('href', '\/daren-city/' + siteCityId);
+                $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+            }
+            $.get("/check-status", function(data) {
+                if (data=="true") {
+                    $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+                } else {
+                    $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+                }
+            });
+            $("#searchForm").submit(function(){
+                var key = $.trim($("input[name='search']").val());
+                if(key.length > 0){
+                    location.href="/search?key=" + key;
+                }
+                return false;
+            });
+
+            $("#select-site").niceSelect();
+            if (siteName) {
+                $("#select-site").val(siteName);
+                $("#select-site").niceSelect('update');
+            }
+            $("#select-site").on('change', function() {
+                if (this.value === 'main') {
+                    $.removeCookie('site_city_id', { path: '/' });
+                    $.removeCookie('site_id', { path: '/' });
+                    $.removeCookie('site_name', { path: '/' });
+                    $.removeCookie('site_site_name', { path: '/' });
+                    $.cookie('select_main', '1', { expires: 2, path: '/' });
+                    window.location.href = "\/";
+                } else {
+                    window.location.href = "\/c/" + this.value;
+                }
+            });
+        })
+    </script>
+
+    <div class="subnav">
+        <ul>
+
+            <li class="first"><a href="/article-list/80/0/1">最新资讯</a></li>
+
+            <li><a href="/article-list/74/0/1">真实婚礼</a></li>
+
+            <li><a href="/article-list/70/0/1">风尚大片</a></li>
+
+            <li><a href="/article-list/75/0/1">婚礼攻略</a></li>
+
+            <li><a href="/article-list/73/0/1">人物观点</a></li>
+
+            <li><a href="article/article2_subject_p1.html" class="active">专题策划</a></li>
+
+            <li><a href="/article-list/72/0/1">行业快报</a></li>
+
+            <li><a href="/article-list/76/0/1">风尚活动</a></li>
+
+        </ul>
+    </div>
+    <div class="clearfloat"></div>
+
+    <div class="maincontainer">
+        <div class="article6">
+            <div class="articlelist6">
+                <div class="articlelisttop">
+                    <div class="article_location"><a href="/">首 页</a> &gt; <a href="/articles">资讯</a> &gt; <a href="/article-list/71/0/1">专题策划</a></div>
+                    <div class="article_qyselect">
+                        <select id="selectcity">
+                            <option value="0">全部区域</option>
+
+                            <option value="11">湖北</option>
+
+                            <option value="12">重庆</option>
+
+                            <option value="13">江苏</option>
+
+                            <option value="14">上海</option>
+
+                            <option value="15">北京</option>
+
+                            <option value="16">广东</option>
+
+                            <option value="17">浙江</option>
+
+                            <option value="18">陕西</option>
+
+                            <option value="19">河南</option>
+
+                            <option value="20">海南</option>
+
+                            <option value="21">山东</option>
+
+                            <option value="22">天津</option>
+
+                            <option value="23">安徽</option>
+
+                            <option value="24">广西</option>
+
+                            <option value="25">四川</option>
+
+                            <option value="26">福建</option>
+
+                            <option value="27">山东</option>
+
+                            <option value="28">黑龙江</option>
+
+                            <option value="29">香港</option>
+
+                            <option value="30">云南</option>
+
+                            <option value="31">沈阳</option>
+
+                            <option value="32">湖南</option>
+
+                            <option value="33">贵州</option>
+
+                            <option value="34">吉林</option>
+
+                            <option value="35">内蒙</option>
+
+                            <option value="36">法国</option>
+
+                            <option value="37">江西</option>
+
+                            <option value="38">山西</option>
+
+                            <option value="95">巴厘岛</option>
+
+                        </select>
+                    </div>
+
+                </div>
+                <ul>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/223969" target="_blank"><img class="lazy" data-original="img/article/subject_06.jpg" alt="线帘艺术婚礼 | 婚礼线帘再相逢，丝丝缕缕又一春" width="208" height="208" src="img/article/subject_06.jpg" style="display: inline;"></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/223969" class="title1" target="_blank">线帘艺术婚礼 | 婚礼线帘再相逢，丝丝缕缕又一春</a></div>
+                            <div class="articlelist6_info title2">2022-11-16 文/回车键   图片提供/婚礼风尚合作伙伴</div>
+                            <div class="articlelist6_content">作为一种婚礼布置材料，在大众审美不断提升、简约美成为一种风尚、设计师和策划师们的技艺也不断进步的当下，「天生我材必有用」，近来的线帘确实带着一种后天习得的艺术范儿，迎来了它的「第二春」。</div>
+                            <div class="articlelist6_more"><a href="/articles/223969" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/223585" target="_blank"><img class="lazy" data-original="img/article/subject_07.jpg" alt="他们的20周年纪念日，以及喜庄婚礼的17年" width="208" height="208" src="img/article/subject_07.jpg" style="display: inline;"></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/223585" class="title1" target="_blank">他们的20周年纪念日，以及喜庄婚礼的17年</a></div>
+                            <div class="articlelist6_info title2">2022-09-13 文/雁瑜 图片提供/喜庄婚礼</div>
+                            <div class="articlelist6_content">爱情或许有很多种模样，但最深和最重的爱，必须和时日一起成长。永葆对爱的热忱，日子是因为有人用心才变得不普通。</div>
+                            <div class="articlelist6_more"><a href="/articles/223585" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/223481" target="_blank"><img class="lazy" data-original="img/article/subject_08.jpg" alt="野奢避世 奔赴山野浪漫" width="208" height="208" src="img/article/subject_08.jpg"></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/223481" class="title1" target="_blank">野奢避世 奔赴山野浪漫</a></div>
+                            <div class="articlelist6_info title2">2022-08-19 文/告白宇张 图片提供/仁安悦榕庄</div>
+                            <div class="articlelist6_content">康巴藏区高原上的仁安山谷，属都岗河潺潺流过，牦牛闲散的走在起伏的牧场间，潜藏于山谷之中的藏式农舍依山而建，很难想象这里是悦榕集团在中国的第一家酒店。</div>
+                            <div class="articlelist6_more"><a href="/articles/223481" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/223449" target="_blank"><img class="lazy" data-original="img/article/subject_09.jpg" alt="冰饮般的海边婚礼，海风吹来无穷的爱意" width="208" height="208" src="img/article/subject_09.jpg"></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/223449" class="title1" target="_blank">冰饮般的海边婚礼，海风吹来无穷的爱意</a></div>
+                            <div class="articlelist6_info title2">2022-08-04 文/回车键   图片提供/三亚御婚礼</div>
+                            <div class="articlelist6_content">在海南三亚，海浪所到未到之处，一场场海边婚礼在悄悄发生，几场出自「三亚御婚礼」的海边户外婚礼作品，亦如夏日冰饮一般，带给人视觉上的舒爽和感觉上的甜蜜。一起来看看吧~</div>
+                            <div class="articlelist6_more"><a href="/articles/223449" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/223443" target="_blank"><img class="lazy" data-original="img/article/subject_10.jpg" alt="好的设计是关于「人」的回答" width="208" height="208" src="img/article/subject_10.jpg"></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/223443" class="title1" target="_blank">好的设计是关于「人」的回答</a></div>
+                            <div class="articlelist6_info title2">2022-08-03 文/雁瑜 图片提供/艾俪婚礼ELLEWEDDING</div>
+                            <div class="articlelist6_content">如何成为更好的设计师，不是去看更多的设计，不是学习更多的设计，不是发奋、进修、谋划、看展、阅读、旅行……而是成为具体的人。
+                            </div>
+                            <div class="articlelist6_more"><a href="/articles/223443" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                </ul>
+
+
+                <div class="fy">
+                    <div id="pagenav">
+
+
+                        <span class="page"><a href="article/article2_subject_p1.html">&lt;</a></span>
+
+
+
+
+
+
+
+
+
+
+                        <span class="page"><a href="article/article2_subject_p1.html">1</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p2.html" class="active">2</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p3.html">3</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p4.html">4</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p5.html">5</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p6.html">6</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p7.html">7</a></span>
+
+
+
+
+
+                        <span class="page"><span class="dot">...</span></span>
+                        <span class="page"><a href="article/article2_subject_p42.html">42</a></span>
+
+
+
+                        <span class="page"><a href="article/article2_subject_p3.html">&gt;</a></span>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="articlead1">
+
+            </div>
+        </div>
+        <div style="clear:both; font-size:0;"></div>
+
+    </div>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?1b06b5a7366e3319469bb9e6de2d9c94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+
+
+</body>
+</body>
+<script src="/js/jquery.bxslider.js" type="text/javascript"></script>
+<script  src="/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("img.lazy").lazyload({ threshold : 200,effect : "fadeIn" });
+        $("#m_article").addClass("active");
+        $('#selectcity').val("0");
+        $('#selectcity').change(function(){
+            location.href='\/article-list/71/' + $(this).find('option:selected').val() + '/1';
+        });
+    })
+</script>
+</html>

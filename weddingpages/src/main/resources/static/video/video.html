@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>婚礼视频-婚礼风尚</title>
+    <base href="http://localhost:8081/">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <script src="js/hm.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css">
+</head>
+<body>
+<div id="container">
+    <div class="topcontainer">
+        <div class="top">
+            <div class="site">
+                <div class="nice-select">
+                    <span class="current">全国</span>
+                    <ul class="list">
+                        <li class="option selected" data-value="main">全国</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/" id="m_home" class="s_home" >首页</a></li>
+                    <li><a href="article/article2.html" id="m_article">资讯</a></li>
+                    <li><a href="picture/picture.html" id="m_pic">婚礼图片</a></li>
+                    <li><a href="video/video.html" id="m_video" style="color: #f2f2f2;background-color: #ff4e7e">婚礼视频</a></li>
+                    <li><a href="city/city.html" id="m_jg">婚礼机构</a></li>
+                    <li><a href="minister/minister.html" id="m_daren">婚礼人</a></li>
+                </ul>
+            </div>
+            <form class="search-form" id="searchForm">
+                <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+                <div class="search-btn"><button><img src="img/index/3.png" /></button></div>
+            </form>
+            <div id="userstatus" class="login">
+                <a href="../login/login.html">登录</a>
+                <a href="../login/register.html" style="margin: 0 0 0 12px;">注册</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="headcontainer">
+        <div class="head">
+            <div class="logo">
+                <a class="s_home" href="" title="">
+                    <img src="../img/index/4.jpg" width="200px" height="80px" alt="">
+                </a>
+            </div>
+            <div class="headbanner">
+                <a href="" target="_blank">
+                    <img src="img/video/4.jpg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            if (!$.cookie('site_id') || ($.cookie('site_id') && $.cookie('site_id') !== '1')) {
+                $.cookie('site_id', '1', { expires: 100, path: '/' });
+                $.cookie('site_name', '主站', { expires: 100, path: '/' });
+                $.cookie('site_city_id', '0', { expires: 100, path: '/' });
+                $.cookie('site_site_name', '', { expires: 100, path: '/' });
+            }
+
+            var siteCityId = $.cookie('site_city_id');
+            var siteName = $.cookie('site_site_name');
+            if (siteName && siteCityId) {
+                var sitePath = "c/" + siteName + "/";
+                $('.s_article').attr('href', '\/'+ sitePath +'articles');
+                $('.s_pic').attr('href', '\/'+ sitePath +'pictures');
+                $('.s_video').attr('href', '\/'+ sitePath +'videos');
+                $('.s_jg').attr('href', '\/jigou-city/' + siteCityId);
+                $('.s_daren').attr('href', '\/daren-city/' + siteCityId);
+                $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+            }
+            $.get("/check-status", function(data) {
+                if (data=="true") {
+                    $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+                } else {
+                    $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+                }
+            });
+            $("#searchForm").submit(function(){
+                var key = $.trim($("input[name='search']").val());
+                if(key.length > 0){
+                    location.href="/search?key=" + key;
+                }
+                return false;
+            });
+
+            $("#select-site").niceSelect();
+            if (siteName) {
+                $("#select-site").val(siteName);
+                $("#select-site").niceSelect('update');
+            }
+            $("#select-site").on('change', function() {
+                if (this.value === 'main') {
+                    $.removeCookie('site_city_id', { path: '/' });
+                    $.removeCookie('site_id', { path: '/' });
+                    $.removeCookie('site_name', { path: '/' });
+                    $.removeCookie('site_site_name', { path: '/' });
+                    $.cookie('select_main', '1', { expires: 2, path: '/' });
+                    window.location.href = "\/";
+                } else {
+                    window.location.href = "\/c/" + this.value;
+                }
+            });
+        })
+    </script>
+    <div class="subnav">
+        <ul>
+            <li class="first"><a href="">婚礼电影</a></li>
+            <li><a href="">风尚大片</a></li>
+            <li><a href="">品牌宣传片</a></li>
+            <li><a href="">婚礼纪实</a></li>
+            <li><a href="">亚洲婚礼风尚盛典</a></li>
+            <li><a href="">婚礼风尚影像节</a></li>
+            <li><a href="">创意设计大赛</a></li>
+            <li><a href="">婚礼风尚活动</a></li>
+            <li class="first"><a href="">婚礼秀</a></li>
+            <li><a href="">婚礼布置</a></li>
+            <li><a href="">婚礼人故事</a></li>
+            <li><a href="">婚礼人访谈</a></li>
+            <li><a href="">摄影师作品集</a></li>
+            <li><a href="">摄像师作品集</a></li>
+            <li><a href="">婚纱礼服</a></li>
+        </ul>
+    </div>
+    <div class="clearfloat"></div>
+    <div class="content_top_banner">
+        <div class="bx-wrapper">
+            <div class="bx-viewport">
+                <ul id="slider1">
+                    <li class="bx-clone">
+                        <a href="" target="_blank"><img src="img/video/5.jpg" alt=""></a>
+                    </li>
+                    <li><a href="" target="_blank"><img src="img/video/6.jpg" alt=""></a></li>
+                    <li><a href="" target="_blank"><img src="img/video/7.jpg" alt=""></a></li>
+                    <li><a href="" target="_blank"><img src="img/video/8.jpg" alt=""></a></li>
+                    <li><a href="" target="_blank"><img src="img/video/9.jpg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="maincontainer">
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Wedding Movie</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE Movie</a></div>
+            <div class="infotitle2"><a href="" target="_blank">婚礼电影</a></div>
+        </div>
+        <div class="piclist2">
+            <ul class="videolist1" style="margin: 33px 0 0 0;">
+                <li class="first">
+                    <div class="piclist_pic2">
+                        <a href="http://localhost:63342/wedding/weddingclient/static/pages/video/1.html?_ijt=632nb8opoiiluh3b6tkp0p6rde&_ij_reload=RELOAD_ON_SAVE" title="请不要温柔地走进那个良夜" target="_blank">
+                            <img class="lazy" data-original="img/video/10.jpg"  alt="请不要温柔地走进那个良夜" width="374" height="237" src="img/video/10.jpg" style="display: inline;" >
+                        </a>
+                    </div>
+                    <div class="piclist_title3">
+                        <a class="title1" href="" title="请不要温柔地走进那个良夜" target="_blank">请不要温柔地走进那个良夜</a>
+                    </div>
+                    <div class="piclist_info3">
+                        <a class="title2" href="" title="REAL的FILM" target="_blank">REAL的FILM</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="piclist_pic2">
+                        <a href="" title="中式美学再创造" target="_blank">
+                            <img class="lazy" data-original="img/video/11.jpg" alt="中式美学再创造" width="374" height="237" src="img/video/11.jpg" style="display: inline;">
+                        </a>
+                    </div>
+                    <div class="piclist_title3">
+                        <a class="title1" href="" title="中式美学再创造" target="_blank">中式美学再创造</a>
+                    </div>
+                    <div class="piclist_info3">
+                        <a class="title2" href="" title="RealWedding" target="_blank">RealWedding</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="piclist_pic2">
+                        <a href="" title="舞至黎明" target="_blank">
+                            <img class="lazy" data-original="img/video/12.jpg" alt="舞至黎明" width="374" height="237" src="img/video/12.jpg" style="display: inline;">
+                        </a>
+                    </div>
+                    <div class="piclist_title3">
+                        <a class="title1" href="" title="舞至黎明"target="_blank">舞至黎明</a>
+                    </div>
+                    <div class="piclist_info3">
+                        <a class="title2" href="" title="GoldenLove Production" target="_blank">GoldenLove Production</a>
+                    </div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2">
+                        <a href="" title="百分百甜味朱古力" target="_blank">
+                            <img class="lazy" data-original="img/video/13.jpg" alt="百分百甜味朱古力" width="374" height="237" src="img/video/13.jpg" style="display: inline;">
+                        </a>
+                    </div>
+                    <div class="piclist_title3">
+                        <a class="title1" href="" title="百分百甜味朱古力"target="_blank">百分百甜味朱古力</a>
+                    </div>
+                    <div class="piclist_info3">
+                        <a class="title2" href="" title="菲宁视觉" target="_blank">菲宁视觉</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="piclist_pic2">
+                        <a href="" title="他喜欢唱歌，我喜欢你" target="_blank">
+                            <img class="lazy" data-original="img/video/14.jpg" alt="他喜欢唱歌，我喜欢你" width="374" height="237" src="img/video/14.jpg" style="display: inline;">
+                        </a>
+                    </div>
+                    <div class="piclist_title3">
+                        <a class="title1" href="" title="他喜欢唱歌，我喜欢你"target="_blank">他喜欢唱歌，我喜欢你</a>
+                    </div>
+                    <div class="piclist_info3">
+                        <a class="title2" href="" title="菲宁视觉" target="_blank">菲宁视觉</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="line"></div>
+
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">WeddingVogue Present</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">风尚大片</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="中国新娘 · 2021" target="_blank"><img class="lazy" data-original="" alt="中国新娘 · 2021" width="374" height="237" src="img/video/15.jpg" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘 · 2021" class="title1" target="_blank">中国新娘 · 2021</a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="中国新娘·2020" target="_blank"><img class="lazy" data-original="" width="374" height="237" src="img/video/16.jpg" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘·2020" class="title1" target="_blank">中国新娘·2020</a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="中国新娘·2019" target="_blank"><img class="lazy" data-original="" alt="中国新娘·2019" width="374" height="237" src="img/video/1.gif" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘·2019" class="title1" target="_blank">中国新娘·2019</a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="中国新娘·2018" target="_blank"><img class="lazy" data-original="" alt="中国新娘·2018" width="374" height="237" src="img/video/2.gif" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘·2018" class="title1" target="_blank">中国新娘·2018</a></div>
+                    <div class="piclist_info3"><a href="" title="根号肆电影工作室" class="title2" target="_blank">根号肆电影工作室</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="中国新娘 · 2017" target="_blank"><img class="lazy" data-original="" alt="中国新娘 · 2017" width="374" height="237" src="img/video/17.jpg" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘 · 2017" class="title1" target="_blank">中国新娘 · 2017</a></div>
+                    <div class="piclist_info3"><a href="" title="成都图腾影像" class="title2" target="_blank">成都图腾影像</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="中国新娘 · 2016" target="_blank"><img class="lazy" data-original="" alt="中国新娘 · 2016" width="374" height="237" src="img/video/18.jpg" style="display: inline;"></a></div>
+                    <div class="piclist_title3"><a href="" title="中国新娘 · 2016" class="title1" target="_blank">中国新娘 · 2016</a></div>
+                    <div class="piclist_info3"><a href="" title="时光机影像" class="title2" target="_blank">时光机影像</a></div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Wedding Emotion</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼纪实</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="华尔道夫韩式婚礼" target="_blank"><img class="lazy" data-original="" alt="华尔道夫韩式婚礼" width="374" height="237" src="img/video/19.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="华尔道夫韩式婚礼" class="title1" target="_blank">华尔道夫韩式婚礼</a></div>
+                    <div class="piclist_info3"><a href="" title="梦的起点婚礼设计&amp;绯系视觉" class="title2" target="_blank">梦的起点婚礼设计&amp;绯系视觉</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="关爱" target="_blank"><img class="lazy" data-original="" alt="关爱" width="374" height="237" src="img/video/20.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="关爱" class="title1" target="_blank">关爱</a></div>
+                    <div class="piclist_info3"><a href="" title="CARE宴会设计" class="title2" target="_blank">CARE宴会设计</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="路短情长" target="_blank"><img class="lazy" data-original="" alt="路短情长" width="374" height="237" src="img/video/21.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="路短情长" class="title1" target="_blank">路短情长</a></div>
+                    <div class="piclist_info3"><a href="" title="菲宁视觉" class="title2" target="_blank">菲宁视觉</a></div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Asian WeddingVogue Awards</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">亚洲婚礼风尚盛典</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="WE" target="_blank"><img class="lazy" data-original="" alt="WE" width="374" height="237" src="img/video/22.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="WE" class="title1" target="_blank">WE</a></div>
+                    <div class="piclist_info3"><a href="" title="赖梓愈Caleb RAI" class="title2" target="_blank">赖梓愈Caleb RAI</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="造神指南" target="_blank"><img class="lazy" data-original="" alt="造神指南" width="374" height="237" src="img/video/23.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="造神指南" class="title1" target="_blank">造神指南</a></div>
+                    <div class="piclist_info3"><a href="" title="TuZeus最婚礼" class="title2" target="_blank">TuZeus最婚礼</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="回家，何以为家？" target="_blank"><img class="lazy" data-original="" alt="回家，何以为家？" width="374" height="237" src="img/video/24.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="回家，何以为家？" class="title1" target="_blank">回家，何以为家？</a></div>
+                    <div class="piclist_info3"><a href="" title="梦的起点婚礼设计" class="title2" target="_blank">梦的起点婚礼设计</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="岛屿" target="_blank"><img class="lazy" data-original="" src="img/video/25.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="岛屿" class="title1" target="_blank">岛屿</a></div>
+                    <div class="piclist_info3"><a href="" title="WeddingWind婚礼风" class="title2" target="_blank">WeddingWind婚礼风</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="萤火虫的仲夏夜" target="_blank"><img class="lazy" data-original="" alt="萤火虫的仲夏夜" width="374" height="237" src="img/video/26.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="萤火虫的仲夏夜" class="title1" target="_blank">萤火虫的仲夏夜</a></div>
+                    <div class="piclist_info3"><a href="" title="曼可瑞尔" class="title2" target="_blank">曼可瑞尔</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="“成”风“魄”浪" target="_blank"><img class="lazy" data-original="" alt="“成”风“魄”浪" width="374" height="237" src="img/video/27.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="“成”风“魄”浪" class="title1" target="_blank">“成”风“魄”浪</a></div>
+                    <div class="piclist_info3"><a href="" title="徐丹" class="title2" target="_blank">徐丹</a></div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">weddingvogue</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼风尚影像节</a> －</div>
+        </div>
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="Heart Shore" target="_blank"><img class="lazy" data-original="" alt="Heart Shore" width="374" height="237" src="img/video/28.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="Heart Shore" class="title1" target="_blank">Heart Shore</a></div>
+                    <div class="piclist_info3"><a href="" title="VWONDER影像社" class="title2" target="_blank">VWONDER影像社</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="The shimmer" target="_blank"><img class="lazy" data-original="" alt="The shimmer" width="374" height="237" src="img/video/29.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="The shimmer" class="title1" target="_blank">The shimmer</a></div>
+                    <div class="piclist_info3"><a href="" title="菲宁视觉" class="title2" target="_blank">菲宁视觉</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="Memory element" target="_blank"><img class="lazy" data-original="" alt="Memory element" width="374" height="237" src="img/video/30.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="Memory element" class="title1" target="_blank">Memory element</a></div>
+                    <div class="piclist_info3"><a href="" title="ME影像工作室" class="title2" target="_blank">ME影像工作室</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="GH2020年度混剪" target="_blank"><img class="lazy" data-original="" alt="GH2020年度混剪" width="374" height="237" src="img/video/31.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="GH2020年度混剪" class="title1" target="_blank">GH2020年度混剪</a></div>
+                    <div class="piclist_info3"><a href="" title="根号肆电影工作室" class="title2" target="_blank">根号肆电影工作室</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="轮椅上的华尔兹" target="_blank"><img class="lazy" data-original="" alt="轮椅上的华尔兹" width="374" height="237" src="img/video/32.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="轮椅上的华尔兹" class="title1" target="_blank">轮椅上的华尔兹</a></div>
+                    <div class="piclist_info3"><a href="" title="与零电影ZEROFILM" class="title2" target="_blank">与零电影ZEROFILM</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="像我一样爱她" target="_blank"><img class="lazy" data-original="" alt="像我一样爱她" width="374" height="237" src="img/video/33.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="像我一样爱她" class="title1" target="_blank">像我一样爱她</a></div>
+                    <div class="piclist_info3"><a href="" title="REAL的FILM" class="title2" target="_blank">REAL的FILM</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="CyberLover" target="_blank"><img class="lazy" data-original="" alt="CyberLover" width="374" height="237" src="img/video/34.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="CyberLover" class="title1" target="_blank">CyberLover</a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="一路远行" target="_blank"><img class="lazy" data-original="" alt="一路远行" width="374" height="237" src="img/video/35.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="一路远行" class="title1" target="_blank">一路远行</a></div>
+                    <div class="piclist_info3"><a href="" title="肃及婚礼影像" class="title2" target="_blank">肃及婚礼影像</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="冰岛旅拍宇航员版" target="_blank"><img class="lazy" data-original="" alt="冰岛旅拍宇航员版" width="374" height="237" src="img/video/36.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="冰岛旅拍宇航员版" class="title1" target="_blank">冰岛旅拍宇航员版</a></div>
+                    <div class="piclist_info3"><a href="" title="云洲数字电影" class="title2" target="_blank">云洲数字电影</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="万物生" target="_blank"><img class="lazy" data-original="" alt="万物生" width="374" height="237" src="img/video/37.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="万物生" class="title1" target="_blank">万物生</a></div>
+                    <div class="piclist_info3"><a href="" title="香港汤池" class="title2" target="_blank">香港汤池</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="About Love" target="_blank"><img class="lazy" data-original="" alt="About Love" width="374" height="237" src="img/video/38.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="About Love" class="title1" target="_blank">About Love</a></div>
+                    <div class="piclist_info3"><a href="" title="绯系视觉" class="title2" target="_blank">绯系视觉</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="中卫旅拍" target="_blank"><img class="lazy" data-original="" alt="中卫旅拍" width="374" height="237" src="img/video/39.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="中卫旅拍" class="title1" target="_blank">中卫旅拍</a></div>
+                    <div class="piclist_info3"><a href="" title="根号肆电影工作室" class="title2" target="_blank">根号肆电影工作室</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">creative design competition</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">创意设计大赛</a> －</div>
+        </div>
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="星河清梦" target="_blank"><img class="lazy" data-original="" alt="星河清梦" width="374" height="237" src="img/video/40.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="星河清梦" class="title1" target="_blank">星河清梦</a></div>
+                    <div class="piclist_info3"><a href="" title="微致婚礼" class="title2" target="_blank">微致婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="圆满" target="_blank"><img class="lazy" data-original="" alt="圆满" width="374" height="237" src="img/video/41.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="圆满" class="title1" target="_blank">圆满</a></div>
+                    <div class="piclist_info3"><a href="" title="萝亚婚礼" class="title2" target="_blank">萝亚婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="吾爱至尊" target="_blank"><img class="lazy" data-original="" alt="吾爱至尊" width="374" height="237" src="img/video/42.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="吾爱至尊" class="title1" target="_blank">吾爱至尊</a></div>
+                    <div class="piclist_info3"><a href="" title="嘉妤虹" class="title2" target="_blank">嘉妤虹</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="仲夏夜之梦" target="_blank"><img class="lazy" data-original="" alt="仲夏夜之梦" width="374" height="237" src="img/video/43.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="仲夏夜之梦" class="title1" target="_blank">仲夏夜之梦</a></div>
+                    <div class="piclist_info3"><a href="" title="品诚创意婚礼" class="title2" target="_blank">品诚创意婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="魔女的晚宴" target="_blank"><img class="lazy" data-original="" alt="魔女的晚宴" width="374" height="237" src="img/video/44.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="魔女的晚宴" class="title1" target="_blank">魔女的晚宴</a></div>
+                    <div class="piclist_info3"><a href="" title="糖果婚礼策划" class="title2" target="_blank">糖果婚礼策划</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="案" target="_blank"><img class="lazy" data-original="" alt="案" width="374" height="237" src="img/video/45.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="案" class="title1" target="_blank">案</a></div>
+                    <div class="piclist_info3"><a href="" title="赖梓愈Caleb RAI" class="title2" target="_blank">赖梓愈Caleb RAI</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Weddingvogue Event</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼风尚活动</a> －</div>
+        </div>
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="婚礼风尚 X CHOCO-启蔻婚礼唐瀚" target="_blank"><img class="lazy" data-original="" alt="婚礼风尚 X CHOCO-启蔻婚礼唐瀚" width="374" height="237" src="img/video/46.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="婚礼风尚 X CHOCO-启蔻婚礼唐瀚" class="title1" target="_blank">婚礼风尚 X CHOCO-启蔻婚礼唐瀚</a></div>
+                    <div class="piclist_info3"><a href="" title="CHOCO-启蔻婚礼" class="title2" target="_blank">CHOCO-启蔻婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="成视 | 管理者合集视频" target="_blank"><img class="lazy" data-original="" alt="成视 | 管理者合集视频" width="374" height="237" src="img/video/47.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="成视 | 管理者合集视频" class="title1" target="_blank">成视 | 管理者合集视频</a></div>
+                    <div class="piclist_info3"><a href="" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="成视 | 设计师合集视频" target="_blank"><img class="lazy" data-original="" alt="成视 | 设计师合集视频" width="374" height="237" src="img/video/48.png"></a></div>
+                    <div class="piclist_title3"><a href="" title="成视 | 设计师合集视频" class="title1" target="_blank">成视 | 设计师合集视频</a></div>
+                    <div class="piclist_info3"><a href="" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="理遇" target="_blank"><img class="lazy" data-original="" alt="理遇" width="374" height="237" src="img/video/49.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="理遇" class="title1" target="_blank">理遇</a></div>
+                    <div class="piclist_info3"><a href="" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="目的地酒店探店 | 金茂三亚亚龙湾丽思卡尔顿酒店" target="_blank"><img class="lazy" data-original="" alt="目的地酒店探店 | 金茂三亚亚龙湾丽思卡尔顿酒店" width="374" height="237" src="img/video/50.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="目的地酒店探店 | 金茂三亚亚龙湾丽思卡尔顿酒店" class="title1" target="_blank">目的地酒店探店 | 金茂三亚亚龙湾丽思卡尔顿酒店</a></div>
+                    <div class="piclist_info3"><a href="" title="金茂三亚亚龙湾丽思卡尔顿酒店" class="title2" target="_blank">金茂三亚亚龙湾丽思卡尔顿酒店</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="2019婚礼风尚年度颁奖典礼 " target="_blank"><img class="lazy" data-original="" alt="2019婚礼风尚年度颁奖典礼 " width="374" height="237" src="img/video/51.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="2019婚礼风尚年度颁奖典礼 " class="title1" target="_blank">2019婚礼风尚年度颁奖典礼 </a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="2019婚礼风尚年度颁奖典礼 | 荣耀晚宴" target="_blank"><img class="lazy" data-original="" alt="2019婚礼风尚年度颁奖典礼 | 荣耀晚宴" width="374" height="237" src="img/video/52.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="2019婚礼风尚年度颁奖典礼 | 荣耀晚宴" class="title1" target="_blank">2019婚礼风尚年度颁奖典礼 | 荣耀晚宴</a></div>
+                    <div class="piclist_info3"><a href="" title="VWONDER影像社" class="title2" target="_blank">VWONDER影像社</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="南京欢迎你" target="_blank"><img class="lazy" data-original="" alt="南京欢迎你" width="374" height="237" src="img/video/53.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="南京欢迎你" class="title1" target="_blank">南京欢迎你</a></div>
+                    <div class="piclist_info3"><a href="" title="" class="title2" target="_blank"></a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】国际化妆名师辛丹华" target="_blank"><img class="lazy" data-original="" alt="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】国际化妆名师辛丹华" width="374" height="237" src="img/video/54.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】国际化妆名师辛丹华" class="title1" target="_blank">【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】国际化妆名师辛丹华</a></div>
+                    <div class="piclist_info3"><a href="" title="辛丹华" class="title2" target="_blank">辛丹华</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】喜来婚礼侯雪莲" target="_blank"><img class="lazy" data-original="" alt="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】喜来婚礼侯雪莲" width="374" height="237" src="img/video/55.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】喜来婚礼侯雪莲" class="title1" target="_blank">【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】喜来婚礼侯雪莲</a></div>
+                    <div class="piclist_info3"><a href="" title="喜来婚礼" class="title2" target="_blank">喜来婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】萝亚婚礼Tina" target="_blank"><img class="lazy" data-original="" alt="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】萝亚婚礼Tina" width="374" height="237" src="img/video/56.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】萝亚婚礼Tina" class="title1" target="_blank">【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】萝亚婚礼Tina</a></div>
+                    <div class="piclist_info3"><a href="" title="萝亚婚礼" class="title2" target="_blank">萝亚婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】先行预告" target="_blank"><img class="lazy" data-original="" alt="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】先行预告" width="374" height="237" src="img/video/57.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】先行预告" class="title1" target="_blank">【婚礼风尚明星婚礼人特别企划--她们走过的婚礼十年】先行预告</a></div>
+                    <div class="piclist_info3"><a href="" title="Studio NEXT-IMAGE 星岚摄影社" class="title2" target="_blank">Studio NEXT-IMAGE 星岚摄影社</a></div>
+                </li>
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="Sea Jewel" target="_blank"><img class="lazy" data-original="" alt="Sea Jewel" width="374" height="237" src="img/video/58.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="Sea Jewel" class="title1" target="_blank">Sea Jewel</a></div>
+                    <div class="piclist_info3"><a href="" title="Touch weddinG &amp; 赖梓愈 Caleb Rai" class="title2" target="_blank">Touch weddinG &amp; 赖梓愈 Caleb Rai</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Wedding Show</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼秀</a> －</div>
+        </div>
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="日光轨迹" target="_blank"><img class="lazy" data-original="" alt="日光轨迹" width="374" height="237" src="img/video/59.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="日光轨迹" class="title1" target="_blank">日光轨迹</a></div>
+                    <div class="piclist_info3"><a href="" title="萝亚婚礼" class="title2" target="_blank">萝亚婚礼</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="星耀湾夏" target="_blank"><img class="lazy" data-original="" alt="星耀湾夏" width="374" height="237" src="img/video/60.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="星耀湾夏" class="title1" target="_blank">星耀湾夏</a></div>
+                    <div class="piclist_info3"><a href="" title="蔷薇婚礼企划" class="title2" target="_blank">蔷薇婚礼企划</a></div>
+                </li>
+                <li>
+                    <div class="piclist_pic2"><a href="" title="古典不暗淡" target="_blank"><img class="lazy" data-original="" alt="古典不暗淡" width="374" height="237" src="img/video/61.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="古典不暗淡" class="title1" target="_blank">古典不暗淡</a></div>
+                    <div class="piclist_info3"><a href="" title="Wonderful Days婚礼定制" class="title2" target="_blank">Wonderful Days婚礼定制</a></div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Wedding Decoration</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼布置</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="影韵" target="_blank"><img class="lazy" data-original="" alt="影韵" width="374" height="237" src="img/video/62.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="影韵" class="title1" target="_blank">影韵</a></div>
+                    <div class="piclist_info3"><a href="" title="徐丹" class="title2" target="_blank">徐丹</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="琼华神殿" target="_blank"><img class="lazy" data-original="" alt="琼华神殿" width="374" height="237" src="img/video/63.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="琼华神殿" class="title1" target="_blank">琼华神殿</a></div>
+                    <div class="piclist_info3"><a href="" title="华义" class="title2" target="_blank">华义</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="/videos/217011" title="路" target="_blank"><img class="lazy" data-original="" alt="路" width="374" height="237" src="img/video/64.jpg"></a></div>
+                    <div class="piclist_title3"><a href="/videos/217011" title="路" class="title1" target="_blank">路</a></div>
+                    <div class="piclist_info3"><a href="" title="HANA高级婚礼定制" class="title2" target="_blank">HANA高级婚礼定制</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="偏爱" target="_blank"><img class="lazy" data-original="" alt="偏爱" width="374" height="237" src="img/video/65.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="偏爱" class="title1" target="_blank">偏爱</a></div>
+                    <div class="piclist_info3"><a href="" title="CARE宴会设计" class="title2" target="_blank">CARE宴会设计</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="山峦" target="_blank"><img class="lazy" data-original="" alt="山峦" width="374" height="237" src="img/video/66.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="山峦" class="title1" target="_blank">山峦</a></div>
+                    <div class="piclist_info3"><a href="" title="大喜婚礼定制" class="title2" target="_blank">大喜婚礼定制</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="星·辰" target="_blank"><img class="lazy" data-original="" alt="星·辰" width="374" height="237" src="img/video/67.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="星·辰" class="title1" target="_blank">星·辰</a></div>
+                    <div class="piclist_info3"><a href="" title="华义" class="title2" target="_blank">华义</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank">Professional Story</a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">婚礼人故事</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="思夜MV" target="_blank"><img class="lazy" data-original="" alt="思夜MV" width="374" height="237" src="img/video/68.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="思夜MV" class="title1" target="_blank">思夜MV</a></div>
+                    <div class="piclist_info3"><a href="" title="赖梓愈Caleb RAI" class="title2" target="_blank">赖梓愈Caleb RAI</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="乍见之欢，忠于久处不厌" target="_blank"><img class="lazy" data-original="" alt="乍见之欢，忠于久处不厌" width="374" height="237" src="img/video/69.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="乍见之欢，忠于久处不厌" class="title1" target="_blank">乍见之欢，忠于久处不厌</a></div>
+                    <div class="piclist_info3"><a href="" title="婚礼空间WeddingSpace" class="title2" target="_blank">婚礼空间WeddingSpace</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="NIKI的世界" target="_blank"><img class="lazy" data-original="" alt="NIKI的世界" width="374" height="237" src="img/video/70.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="NIKI的世界" class="title1" target="_blank">NIKI的世界</a></div>
+                    <div class="piclist_info3"><a href="" title="伯妮婚礼策划机构" class="title2" target="_blank">伯妮婚礼策划机构</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="个人形象片 — 盼盼" target="_blank"><img class="lazy" data-original="" alt="个人形象片 — 盼盼" width="374" height="237" src="img/video/71.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="个人形象片 — 盼盼" class="title1" target="_blank">个人形象片 — 盼盼</a></div>
+                    <div class="piclist_info3"><a href="" title="盼盼" class="title2" target="_blank">盼盼</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="世界在你脚下，爱是唯一信仰" target="_blank"><img class="lazy" data-original="" alt="世界在你脚下，爱是唯一信仰" width="374" height="237" src="img/video/72.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="世界在你脚下，爱是唯一信仰" class="title1" target="_blank">世界在你脚下，爱是唯一信仰</a></div>
+                    <div class="piclist_info3"><a href="" title="张晓光" class="title2" target="_blank">张晓光</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="云龙雪山目的地婚礼" target="_blank"><img class="lazy" data-original="" alt="云龙雪山目的地婚礼" width="374" height="237" src="img/video/73.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="云龙雪山目的地婚礼" class="title1" target="_blank">云龙雪山目的地婚礼</a></div>
+                    <div class="piclist_info3"><a href="" title="吴骏逸" class="title2" target="_blank">吴骏逸</a></div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="line"></div>
+        <div class="infohead">
+            <div class="infotitle"><a href="" target="_blank"></a></div>
+            <div class="infomore"><a href="" target="_blank">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="" target="_blank">摄像师作品集</a> －</div>
+        </div>
+
+        <div class="piclist2">
+            <ul class="videolist1" style="margin:33px 0 0 0;">
+
+                <li class="first">
+                    <div class="piclist_pic2"><a href="" title="2019九木纪婚礼混剪" target="_blank"><img class="lazy" data-original="" alt="2019九木纪婚礼混剪" width="374" height="237" src="img/video/74.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="2019九木纪婚礼混剪" class="title1" target="_blank">2019九木纪婚礼混剪</a></div>
+                    <div class="piclist_info3"><a href="" title="老艾" class="title2" target="_blank">老艾</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="A JOURNEY OF LOVE   " target="_blank"><img class="lazy" data-original="" alt="A JOURNEY OF LOVE   " width="374" height="237" src="img/video/75.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="A JOURNEY OF LOVE   " class="title1" target="_blank">A JOURNEY OF LOVE   </a></div>
+                    <div class="piclist_info3"><a href="" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+                </li>
+
+                <li>
+                    <div class="piclist_pic2"><a href="" title="2019根号肆婚礼混剪" target="_blank"><img class="lazy" data-original="" alt="2019根号肆婚礼混剪" width="374" height="237" src="img/video/76.jpg"></a></div>
+                    <div class="piclist_title3"><a href="" title="2019根号肆婚礼混剪" class="title1" target="_blank">2019根号肆婚礼混剪</a></div>
+                    <div class="piclist_info3"><a href="" title="根号肆电影工作室" class="title2" target="_blank">根号肆电影工作室</a></div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="clearfloat"></div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+<script src="js/jquery.bxslider.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#slider1').bxSlider({
+            controls:false,
+            auto: true,
+            pause: 4000
+        });
+        $("img.lazy").lazyload({ threshold : 400,effect : "fadeIn" });
+        $("#m_video").addClass("active");
+    })
+</script>
+</body>
+<script src="js/jquery-3.7.0.js"></script>
+</html>

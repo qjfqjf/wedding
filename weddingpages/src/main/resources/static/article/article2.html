@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>资讯 - 婚礼风尚</title>
+    <base href="http://localhost:8081/">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/jquery.bxslider3.css">
+    <script  src="/js/jquery.nice-select.min.js"></script>
+    <script  src="/js/jquery.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <div class="topcontainer">
+        <div class="top">
+            <div class="site">
+                <div class="nice-select">
+                    <span class="current">全国</span>
+                    <ul class="list">
+                        <li class="option selected" data-value="main">全国</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/" id="m_home" class="s_home" >首页</a></li>
+                    <li><a href="article/article2.html" id="m_article"  style="color: #f2f2f2;background-color: #ff4e7e">资讯</a></li>
+                    <li><a href="picture/picture.html" id="m_pic">婚礼图片</a></li>
+                    <li><a href="video/video.html" id="m_video">婚礼视频</a></li>
+                    <li><a href="city/city.html" id="m_jg" style="background-color: #f2f2f2;color: black">婚礼机构</a></li>
+                    <li><a href="minister/minister.html" id="m_daren">婚礼人</a></li>
+                </ul>
+            </div>
+            <form class="search-form" id="searchForm">
+                <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+                <div class="search-btn"><button><img src="img/index/3.png" /></button></div>
+            </form>
+            <div id="userstatus" class="login">
+                <a href="../login/login.html">登录</a>
+                <a href="../login/register.html" style="margin: 0 0 0 12px;">注册</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="headcontainer">
+        <div class="head">
+            <div class="logo"><a href="/" class="s_home" title="婚礼风尚"><img src="img/index/article3.jpg" width="200" height="82" alt="婚礼风尚"></a></div>
+            <div class="headbanner">
+
+                <a href="http://www.weddingvogue.cn/job" target="_blank">
+                    <img src="img/index/article4.jpg" alt="">
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            if (!$.cookie('site_id') || ($.cookie('site_id') && $.cookie('site_id') !== '1')) {
+                $.cookie('site_id', '1', { expires: 100, path: '/' });
+                $.cookie('site_name', '主站', { expires: 100, path: '/' });
+                $.cookie('site_city_id', '0', { expires: 100, path: '/' });
+                $.cookie('site_site_name', '', { expires: 100, path: '/' });
+            }
+
+            var siteCityId = $.cookie('site_city_id');
+            var siteName = $.cookie('site_site_name');
+            if (siteName && siteCityId) {
+                var sitePath = "c/" + siteName + "/";
+                $('.s_article').attr('href', '\/'+ sitePath +'articles');
+                $('.s_pic').attr('href', '\/'+ sitePath +'pictures');
+                $('.s_video').attr('href', '\/'+ sitePath +'videos');
+                $('.s_jg').attr('href', '\/jigou-city/' + siteCityId);
+                $('.s_daren').attr('href', '\/daren-city/' + siteCityId);
+                $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+            }
+            $.get("/check-status", function(data) {
+                if (data=="true") {
+                    $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+                } else {
+                    $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+                }
+            });
+            $("#searchForm").submit(function(){
+                var key = $.trim($("input[name='search']").val());
+                if(key.length > 0){
+                    location.href="/search?key=" + key;
+                }
+                return false;
+            });
+
+            $("#select-site").niceSelect();
+            if (siteName) {
+                $("#select-site").val(siteName);
+                $("#select-site").niceSelect('update');
+            }
+            $("#select-site").on('change', function() {
+                if (this.value === 'main') {
+                    $.removeCookie('site_city_id', { path: '/' });
+                    $.removeCookie('site_id', { path: '/' });
+                    $.removeCookie('site_name', { path: '/' });
+                    $.removeCookie('site_site_name', { path: '/' });
+                    $.cookie('select_main', '1', { expires: 2, path: '/' });
+                    window.location.href = "\/";
+                } else {
+                    window.location.href = "\/c/" + this.value;
+                }
+            });
+        })
+    </script>
+
+    <div class="subnav">
+        <ul>
+
+            <li class="first"><a href="/article-list/80/0/1">最新资讯</a></li>
+
+            <li><a href="/article-list/74/0/1">真实婚礼</a></li>
+
+            <li><a href="/article-list/70/0/1">风尚大片</a></li>
+
+            <li><a href="/article-list/75/0/1">婚礼攻略</a></li>
+
+            <li><a href="/article-list/73/0/1">人物观点</a></li>
+
+            <li><a href="/article-list/71/0/1">专题策划</a></li>
+
+            <li><a href="/article-list/72/0/1">行业快报</a></li>
+
+            <li><a href="/article-list/76/0/1">风尚活动</a></li>
+
+        </ul>
+    </div>
+    <div class="clearfloat" style=" width:1150px; height:15px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content_top_banner">
+        <div class="bx-wrapper" style="max-width: 100%;">
+            <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 463px;">
+                <ul id="slider1" class="newArticle" style="width: 715%; position: relative; transition-duration: 0s; transform: translate3d(-1150px, 0px, 0px);">
+                    <li style="float: left; list-style: none; position: relative; width: 1150px;" class="bx-clone"><a href="https://www.weddingvogue.cn/articles/223970" target="_blank"><img src="" width="1150" height="463"></a></li>
+
+                    <li style="float: left; list-style: none; position: relative; width: 1150px;"><a href="https://www.weddingvogue.cn/articles/227943" target="_blank"><img src="" width="1150" height="463"></a></li>
+
+                    <li style="float: left; list-style: none; position: relative; width: 1150px;"><a href="https://www.weddingvogue.cn/articles/223886" target="_blank"><img src="" width="1150" height="463"></a></li>
+
+                    <li style="float: left; list-style: none; position: relative; width: 1150px;"><a href="https://www.weddingvogue.cn/articles/224378" target="_blank"><img src="" width="1150" height="463"></a></li>
+
+                    <li style="float: left; list-style: none; position: relative; width: 1150px;"><a href="https://www.weddingvogue.cn/articles/223970" target="_blank"><img src="" width="1150" height="463"></a></li>
+
+                </ul>
+            </div></div></div>
+</div>
+
+    <div class="maincontainer">
+
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/74/0/1">Real Wedding</a></div>
+            <div class="infomore"><a href="/article-list/74/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/74/0/1">真实婚礼</a> －</div>
+        </div>
+
+        <div class="articlelist4 real">
+            <ul>
+
+                <li class="first">
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/227777" title="" target="_blank"><img class="lazy" data-original="" alt="真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场" width="278" height="404" src="" style="display: inline;"></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/227777" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/227777" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/227293" title="真实婚礼 | 于千万年岁月雕琢的羚羊谷地，聆听亘古未变的爱情史诗" target="_blank"><img class="lazy" data-original="" alt="真实婚礼 | 于千万年岁月雕琢的羚羊谷地，聆听亘古未变的爱情史诗" width="278" height="404" src="" style="display: inline;"></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/227293" title="真实婚礼 | 于千万年岁月雕琢的羚羊谷地，聆听亘古未变的爱情史诗" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/227293" title="真实婚礼 | 于千万年岁月雕琢的羚羊谷地，聆听亘古未变的爱情史诗" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" target="_blank"><img class="lazy" data-original="" alt="真实婚礼 | 于云深不知处，寻得圆满" width="278" height="404" src="" style="display: inline;"></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" class="title1" target="_blank">真实婚礼 | 于云深不知处，寻得圆满</a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" target="_blank"><img class="lazy" data-original="" alt="真实婚礼 | 于云深不知处，寻得圆满" width="278" height="404" src="" style="display: inline;"></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" class="title1" target="_blank">真实婚礼 | 于云深不知处，寻得圆满</a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/226926" title="真实婚礼 | 于云深不知处，寻得圆满" target="_blank">READ MORE</a></div>
+                </li>
+
+            </ul>
+            <div style="clear:both; font-size:0;"></div>
+        </div>
+
+<!--  婚礼攻略-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/75/0/1">Wedding Guide</a></div>
+            <div class="infomore"><a href="/article-list/75/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/75/0/1">婚礼攻略</a> －</div>
+        </div>
+        <div class="infolist  skill">
+            <ul>
+
+                <li class="first">
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/224301" title="" target="_blank"><img class="lazy" data-original="" alt="" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right skill2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/224301" title="」" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/224301" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li>
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/223487" title="" target="_blank"><img class="lazy" data-original="" alt="" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right skill2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/223487" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/223487" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li class="first">
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/221436" title="" target="_blank"><img class="lazy" data-original="" alt="" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right skill2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/221436" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/221436" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li>
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/221124" title="" target="_blank"><img class="lazy" data-original="" alt="" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right skill2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/221124" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/221124" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+            </ul>
+            <div style="clear:both; font-size:0;"></div>
+        </div>
+
+        <!--风尚大片-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/70/0/1">Weddingvogue Bride</a></div>
+            <div class="infomore"><a href="/article-list/70/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/70/0/1">风尚大片</a> －</div>
+        </div>
+        <div class="articlelist4 fashoon">
+            <ul>
+                <li class="first">
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank"><img class="lazy" data-original="" alt="" width="278" height="404" src=""></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/214960" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank"><img class="lazy" data-original="" alt="" width="278" height="404" src=""></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/214960" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank"><img class="lazy" data-original="" alt="" width="278" height="404" src=""></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/214960" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="articlelist4_pic"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank"><img class="lazy" data-original="" alt="" width="278" height="404" src=""></a></div>
+                    <div class="articlelist4_title"><a href="https://www.weddingvogue.cn/articles/214960" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist4_info title2"></div>
+                    <div class="articlelist4_content"></div>
+                    <div class="articlelist4_more"><a href="https://www.weddingvogue.cn/articles/214960" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+            </ul>
+            <div style="clear:both; font-size:0;"></div>
+        </div>
+
+<!--        人物观点-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/73/0/1">Wedding Views</a></div>
+            <div class="infomore"><a href="/article-list/73/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/73/0/1">人物观点</a> －</div>
+        </div>
+        <div class="article5">
+            <div class="view">
+                <div class="articlelist6">
+                    <ul>
+                        <li class="first">
+                            <div class="articlelist6_left"><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" target="_blank"><img class="lazy" data-original="" alt="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" width="208" height="208" src=""></a></div>
+                            <div class="articlelist6_right">
+                                <div class="articlelist6_title"><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" class="title1" target="_blank"></a></div>
+                                <div class="articlelist6_info title2"></div>
+                                <div class="articlelist6_content"></div>
+                                <div class="articlelist6_more"><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" target="_blank">READ MORE &gt;</a></div>
+                            </div>
+                            <div style="clear:both; font-size:0;"></div>
+                        </li>
+
+                        <li>
+                            <div class="articlelist6_left"><a href="https://www.weddingvogue.cn/articles/226682" title="人物观点 | 天乐 ：从婚礼策划公司到沉浸式艺术产业园" target="_blank"><img class="lazy" data-original="" alt="人物观点 | 天乐 ：从婚礼策划公司到沉浸式艺术产业园" width="208" height="208" src=""></a></div>
+                            <div class="articlelist6_right">
+                                <div class="articlelist6_title"><a href="https://www.weddingvogue.cn/articles/226682" title="人物观点 | 天乐 ：从婚礼策划公司到沉浸式艺术产业园" class="title1" target="_blank"></a></div>
+                                <div class="articlelist6_info title2"></div>
+                                <div class="articlelist6_content"></div>
+                                <div class="articlelist6_more"><a href="https://www.weddingvogue.cn/articles/226682" title="人物观点 | 天乐 ：从婚礼策划公司到沉浸式艺术产业园" target="_blank">READ MORE &gt;</a></div>
+                            </div>
+                            <div style="clear:both; font-size:0;"></div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="articlead1" style="margin:0;">
+
+                    <div class="first"><a href="https://www.weddingvogue.cn/articles/3043" target="_blank"><img class="lazy" data-original="" alt="" src=""></a></div>
+
+                </div>
+            </div>
+        <div style="clear:both; font-size:0;"></div>
+
+<!--        专题策划-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/71/0/1">Special Topic</a></div>
+            <div class="infomore"><a href="/article-list/71/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/71/0/1">专题策划</a> －</div>
+        </div>
+        <div class="articlelist2 Subject">
+            <ul>
+
+                <li class="first">
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank"><img class="lazy" data-original="" alt="IDEA婚礼制造 | 用有趣的点子，构建梦境" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226502" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank"><img class="lazy" data-original="" alt="深海、星空，极简与繁复交织构建爱的时空" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226360" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank"><img class="lazy" data-original="" alt="深海、星空，极简与繁复交织构建爱的时空" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226360" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank"><img class="lazy" data-original="" alt="深海、星空，极简与繁复交织构建爱的时空" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226360" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank"><img class="lazy" data-original="" alt="IDEA婚礼制造 | 用有趣的点子，构建梦境" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226502" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank"><img class="lazy" data-original="" alt="深海、星空，极简与繁复交织构建爱的时空" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226360" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li>
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank"><img class="lazy" data-original="" alt="深海、星空，极简与繁复交织构建爱的时空" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226360" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226360" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+                <li class="first">
+                    <div class="articlelist2_pic"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank"><img class="lazy" data-original="" alt="IDEA婚礼制造 | 用有趣的点子，构建梦境" width="277" height="277" src=""></a></div>
+                    <div class="articlelist2_title"><a href="https://www.weddingvogue.cn/articles/226502" title="" class="title1" target="_blank"></a></div>
+                    <div class="articlelist2_info title2"></div>
+                    <div class="articlelist2_content"></div>
+                    <div class="articlelist2_more"><a href="https://www.weddingvogue.cn/articles/226502" title="" target="_blank">READ MORE</a></div>
+                </li>
+
+            </ul>
+            <div style="clear:both; font-size:0;"></div>
+        </div>
+
+<!--行业快报-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/72/0/1">Wedding Information</a></div>
+            <div class="infomore"><a href="/article-list/72/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/72/0/1">行业快报</a> －</div>
+        </div>
+        <div class="infolist industry">
+            <ul>
+
+                <li class="first">
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/227297" title="" target="_blank"><img class="lazy" data-original="" alt="行业快报 |阿诚设计，网红鹤岗婚礼堂天花板主题厅来袭！" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right industry2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/227297" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/227297" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li>
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/226274" title="" target="_blank"><img class="lazy" data-original="" alt="潮汐风语 | 如月引潮汐，一树光影向幸福坠去" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right industry2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/226274" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/226274" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li class="first">
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/224333" title="" target="_blank"><img class="lazy" data-original="" alt="专注品质婚礼，2023「花逸锦舍」继续出发" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right industry2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/224333" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/224333" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+                <li>
+                    <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/223960" title="" target="_blank"><img class="lazy" data-original="" alt="行业快报 | 阿米莉亚的万花奇境 —— 宝宝宴也可以很高级~" width="208" height="208" src=""></a></div>
+                    <div class="infolist_right industry2">
+                        <div class="infolist_title"><a href="https://www.weddingvogue.cn/articles/223960" title="" class="title1" target="_blank"></a></div>
+                        <div class="infolist_info title2"></div>
+                        <div class="infolist_content"></div>
+                        <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/223960" title="" target="_blank">READ MORE &gt;</a></div>
+                    </div>
+                    <div style="clear:both; font-size:0;"></div>
+                </li>
+
+            </ul>
+            <div style="clear:both; font-size:0;"></div>
+        </div>
+
+<!-- 风尚活活-->
+        <div class="infohead">
+            <div class="infotitle"><a href="/article-list/76/0/1">Weddingvogue Event</a></div>
+            <div class="infomore"><a href="/article-list/76/0/1">SEE MORE</a></div>
+            <div class="infotitle2">－ <a href="/article-list/76/0/1">风尚活动</a> －</div>
+        </div>
+        <div class="article5">
+            <div class="articlelist5 activity">
+                <ul>
+
+                    <li class="first">
+                        <div class="articlelist5_left"><a href="https://www.weddingvogue.cn/articles/228250" title="" target="_blank"><img class="lazy" data-original="" alt="2023亚洲婚礼风尚盛典 | 宴会设计趋势发布之以灯塔之光，燃成星夜" width="300" height="184" src=""></a></div>
+                        <div class="articlelist5_right">
+                            <div class="articlelist5_title"><a href="https://www.weddingvogue.cn/articles/228250" title="" class="title1" target="_blank"></a></div>
+                            <div class="articlelist5_info title2"></div>
+                            <div class="articlelist5_content"></div>
+                            <div class="articlelist5_more"><a href="https://www.weddingvogue.cn/articles/228250" title="" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist5_left"><a href="https://www.weddingvogue.cn/articles/228067" title="" target="_blank"><img class="lazy" data-original="" alt="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" width="300" height="184" src=""></a></div>
+                        <div class="articlelist5_right">
+                            <div class="articlelist5_title"><a href="https://www.weddingvogue.cn/articles/228067" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" class="title1" target="_blank"></a></div>
+                            <div class="articlelist5_info title2"></div>
+                            <div class="articlelist5_content"></div>
+                            <div class="articlelist5_more"><a href="https://www.weddingvogue.cn/articles/228067" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist5_left"><a href="https://www.weddingvogue.cn/articles/227942" title=" 2023亚洲婚礼风尚盛典 |  用动态装置艺术表现灵动的旋转空间" target="_blank"><img class="lazy" data-original="" alt=" 2023亚洲婚礼风尚盛典 |  用动态装置艺术表现灵动的旋转空间" width="300" height="184" src=""></a></div>
+                        <div class="articlelist5_right">
+                            <div class="articlelist5_title"><a href="https://www.weddingvogue.cn/articles/227942" title=" 2023亚洲婚礼风尚盛典 |  用动态装置艺术表现灵动的旋转空间" class="title1" target="_blank"> </a></div>
+                            <div class="articlelist5_info title2"></div>
+                            <div class="articlelist5_content"></div>
+                            <div class="articlelist5_more"><a href="https://www.weddingvogue.cn/articles/227942" title=" 2023亚洲婚礼风尚盛典 |  用动态装置艺术表现灵动的旋转空间" target="_blank">READ MORE &gt;</a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="articlead1 alone" style="margin:0;">
+                <div class="first"><a href="http://www.weddingvogue.cn/articles/1363" target="_blank"><img class="lazy" data-original="" alt="" src="" style="display: inline;"></a></div>
+
+            </div>
+        </div>
+        <div style="clear:both; font-size:0;"></div>
+
+    </div>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?1b06b5a7366e3319469bb9e6de2d9c94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+
+
+</body>
+<script src="/js/jquery.bxslider.js" type="text/javascript"></script>
+<script  src="/js/jquery.cookie.js"></script>
+<script>
+
+    $(function(){
+        $('#slider1').bxSlider({
+
+            controls:false,
+            auto: true,
+            pause: 4000
+        });
+        $("#m_jg").addClass("active");
+        $('.citylist li a').hover(
+            function() {
+                $('span',this).addClass('hover');
+            },
+            function(){
+                $('span',this).removeClass('hover');
+            });
+    })
+
+
+        $(function (){
+
+            //婚礼攻略：黄智飞
+            $.get('http://127.0.0.1:8082/wedInfo/skill',function (resp){
+                //返回的resp是一个json字符串，需要解析为js对象
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历行业快报的4个li元素
+                $(".skill>ul>li").each(function (i,item){
+                    //获取当前li的div，有2个
+                    let div = $(item).children('div');
+                    //超链接设置
+                    div[0].firstChild.title=articleArr[i].title;
+                    //图片设置
+                    div[0].firstChild.firstChild.src = articleArr[i].imagePath;
+                    div[0].firstChild.firstChild['data-original']=articleArr[i].imagePath;
+                    $(".skill>ul>li>.skill2").each(function (j,item2){
+                        let div = $(item2).children('div');
+                        div[0].firstChild.innerHTML=articleArr[j].title;
+                        div[1].innerHTML=articleArr[j].author;
+                        div[2].innerHTML=articleArr[j].descr;
+                        div[3].firstChild.title=articleArr[j].title;
+
+                    })
+                })
+            })
+
+            //人物观点：李鹏飞
+            //发送ajax异步请求查询风尚大片
+            $.get('http://127.0.0.1:8082/wedInfo/view',function (resp){
+                //返回的resp是一个json字符串，需要解析
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历风尚大片4个Li元素
+                $('.view>ul>li').each(function (index,item){
+                    //
+                    let div = $(item).children('div');
+                    //图片设置
+                    div[0].firstChild.firstChild.src = articleArr[index].imagePath;
+                    console.log(div[0].firstChild.alt);
+                    div[0].firstChild.firstChild.alt = articleArr[index].title;
+                    div[0].firstChild.firstChild['data-original']=articleArr[index].imagePath;
+                    console.log(div[0].firstChild.src);
+
+                    div[1].firstChild.innerHTML = articleArr[index].title;
+                    div[2].innerHTML = articleArr[index].author;
+                    div[3].innerHTML = articleArr[index].descr;
+                    div[4].firstChild.title = articleArr[index].title;
+
+                    console.log('-----------');
+                })
+            })
+
+
+
+            //查询行业快报：张霆辉
+            //发送ajax异步请求，查询行业快报
+            $.get('http://127.0.0.1:8082/wedInfo/industry',function (resp){
+                //返回的resp是一个json字符串，需要解析为js对象
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历行业快报的4个li元素
+                $(".industry>ul>li").each(function (i,item){
+                    //获取当前li的div，有2个
+                    let div = $(item).children('div');
+                    //超链接设置
+                    div[0].firstChild.title=articleArr[i].title;
+                    //图片设置
+                    div[0].firstChild.firstChild.src = articleArr[i].imagePath;
+                    div[0].firstChild.firstChild['data-original']=articleArr[i].imagePath;
+                    $(".industry>ul>li>.industry2").each(function (j,item2){
+                        let div = $(item2).children('div');
+                        div[0].firstChild.innerHTML=articleArr[j].title;
+                        div[1].innerHTML=articleArr[j].author;
+                        div[2].innerHTML=articleArr[j].descr;
+                        div[3].firstChild.title=articleArr[j].title;
+                    })
+                })
+            })
+
+                //查询风尚活动：陈海东
+                //发送ajax异步请求，
+            $.get('http://127.0.0.1:8082/wedInfo/activity',function (resp){
+                    //返回的resp是一个json字符串，需要解析为json对象
+                    let obj = JSON.parse(resp);
+                    let articleArr = obj.data;
+                    //遍历风尚活动的3个li元素
+                    $(".activity>ul>li").each(function (i,item){
+                        //获取当前li的div，有3个
+                        let div = $(item).children('div');
+                        //超链接设置
+                        div[0].firstChild.title = articleArr[i].title
+                        //图片设置
+                        div[0].firstChild.firstChild.src = articleArr[i].imagePath;
+                        div[0].firstChild.firstChild['data-original'] = articleArr[i].imagePath;
+                        let childdiv = $(div[1]).children('div');
+                        childdiv[0].firstChild.innerHTML = articleArr[i].title;
+                        childdiv[1].innerHTML = articleArr[i].author;
+                        childdiv[2].innerHTML = articleArr[i].descr;
+                        childdiv[3].firstChild.innerHTML = "READ MORE &gt";
+                        div[2].innerHTML = '';
+                    });
+                    let img = $(".alone>div>a");
+                    img.children('img').attr('data-origin', articleArr[3].imagePath);
+                    img.children('img').attr('src', articleArr[3].imagePath);
+                })
+
+            //查询专题策划：钟迎富
+            //发送ajax异步请求，
+            //发送ajax异步请求，查询专题策划
+            $.get('http://127.0.0.1:8082/wedInfo/Subject',function (resp){
+
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历
+                $('.Subject>ul>li').each(function (i,item){
+                    let div = $(item).children('div');
+                    div[0].firstChild.title=articleArr[i].title;
+                    div[0].firstChild.firstChild['data-original']=articleArr[i].imagePath;
+                    div[0].firstChild.firstChild.src=articleArr[i].imagePath;
+                    div[1].firstChild.innerHTML=articleArr[i].title;
+                    div[2].innerHTML=articleArr[i].author;
+                    div[3].innerHTML=articleArr[i].descr.length>60?articleArr[i].descr.substring(0,57)+"...":articleArr[i].descr;
+                    div[4].firstChild.title=articleArr[i].title;
+                })
+            })
+
+
+            //查询真实婚礼：老师
+            //发送ajax异步请求，
+            $.get('http://127.0.0.1:8082/wedInfo/real',function (resp){
+                //返回的resp是一个json字符串，需要解析为js对象
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历真实婚礼的4个li元素
+                $(".real>ul>li").each(function (i,item){
+                    //获取当前li的div，有5个
+                    let div = $(item).children('div');
+                    //超链接设置
+                    div[0].firstChild.title=articleArr[i].title;
+                    //图片设置
+                    div[0].firstChild.firstChild.src=articleArr[i].imagePath;
+                    div[0].firstChild.firstChild['data-original']=articleArr[i].imagePath;
+                    div[1].firstChild.innerHTML=articleArr[i].title;
+                    div[2].innerHTML=articleArr[i].author;
+                    div[3].innerHTML=articleArr[i].descr.length>=60?articleArr[i].descr.substring(0,57)+"...":articleArr[i].descr;
+                    div[4].firstChild.title=articleArr[i].title;
+                })
+            })
+
+            //查询最新资讯：老师
+            $.get('http://127.0.0.1:8082/wedInfo/new',function (resp){
+                //返回的resp是一个json字符串，需要解析为js对象
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+
+                //遍历真实婚礼的4个li元素
+                $(".newArticle>li").each(function (i,li){
+                    let img = li.firstChild.firstChild;
+                    img.src=articleArr[i].imagePath;
+                })
+            })
+
+            //查询风尚大片：杨合军
+            //发送ajax异步请求查询风尚大片
+            $.get('http://127.0.0.1:8082/wedInfo/fashoon',function (resp){
+                //返回的resp是一个json字符串，需要解析
+                let obj = JSON.parse(resp);
+                let articleArr = obj.data;
+                //遍历风尚大片4个Li元素
+                $('.fashoon>ul>li').each(function (i,item){
+                 //
+                    let div = $(item).children('div');
+                    //图片设置
+                    div[0].firstChild.firstChild.src = articleArr[i].imagePath;
+                    div[0].firstChild.title = articleArr[i].title;
+                    div[0].firstChild.firstChild['data-original']=articleArr[i].imagePath;
+                    div[1].firstChild.innerHTML = articleArr[i].title;
+                    div[1].firstChild.title = articleArr[i].title;
+                    div[2].innerHTML = articleArr[i].author;
+                    div[3].innerHTML = articleArr[i].descr;
+                    div[4].firstChild.title = articleArr[i].title;
+
+                })
+            })
+        })
+</script>
+
+</html>

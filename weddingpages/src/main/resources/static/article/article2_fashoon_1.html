@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>资讯 - 婚礼风尚</title>
+    <base href="http://localhost:8081/">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/jquery.bxslider3.css">
+    <script  src="/js/jquery.nice-select.min.js"></script>
+    <script  src="/js/jquery.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <div class="topcontainer">
+        <div class="top">
+            <div class="site">
+                <div class="nice-select">
+                    <span class="current">全国</span>
+                    <ul class="list">
+                        <li class="option selected" data-value="main">全国</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/" id="m_home" class="s_home" >首页</a></li>
+                    <li><a href="article/article2.html" id="m_article"  style="color: #f2f2f2;background-color: #ff4e7e">资讯</a></li>
+                    <li><a href="picture/picture.html" id="m_pic">婚礼图片</a></li>
+                    <li><a href="video/video.html" id="m_video">婚礼视频</a></li>
+                    <li><a href="city/city.html" id="m_jg" style="background-color: #f2f2f2;color: black">婚礼机构</a></li>
+                    <li><a href="minister/minister.html" id="m_daren">婚礼人</a></li>
+                </ul>
+            </div>
+            <form class="search-form" id="searchForm">
+                <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+                <div class="search-btn"><button><img src="img/index/3.png" /></button></div>
+            </form>
+            <div id="userstatus" class="login">
+                <a href="../login/login.html">登录</a>
+                <a href="../login/register.html" style="margin: 0 0 0 12px;">注册</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="headcontainer">
+        <div class="head">
+            <div class="logo"><a href="/" class="s_home" title="婚礼风尚"><img src="../img/article/fashoon_logo.jpg" width="200" height="82" alt="婚礼风尚" /></a></div>
+            <div class="headbanner">
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            if (!$.cookie('site_id') || ($.cookie('site_id') && $.cookie('site_id') !== '1')) {
+                $.cookie('site_id', '1', { expires: 100, path: '/' });
+                $.cookie('site_name', '主站', { expires: 100, path: '/' });
+                $.cookie('site_city_id', '0', { expires: 100, path: '/' });
+                $.cookie('site_site_name', '', { expires: 100, path: '/' });
+            }
+
+            var siteCityId = $.cookie('site_city_id');
+            var siteName = $.cookie('site_site_name');
+            if (siteName && siteCityId) {
+                var sitePath = "c/" + siteName + "/";
+                $('.s_article').attr('href', '\/'+ sitePath +'articles');
+                $('.s_pic').attr('href', '\/'+ sitePath +'pictures');
+                $('.s_video').attr('href', '\/'+ sitePath +'videos');
+                $('.s_jg').attr('href', '\/jigou-city/' + siteCityId);
+                $('.s_daren').attr('href', '\/daren-city/' + siteCityId);
+                $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+            }
+            $.get("/check-status", function(data) {
+                if (data=="true") {
+                    $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+                } else {
+                    $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+                }
+            });
+            $("#searchForm").submit(function(){
+                var key = $.trim($("input[name='search']").val());
+                if(key.length > 0){
+                    location.href="/search?key=" + key;
+                }
+                return false;
+            });
+
+            $("#select-site").niceSelect();
+            if (siteName) {
+                $("#select-site").val(siteName);
+                $("#select-site").niceSelect('update');
+            }
+            $("#select-site").on('change', function() {
+                if (this.value === 'main') {
+                    $.removeCookie('site_city_id', { path: '/' });
+                    $.removeCookie('site_id', { path: '/' });
+                    $.removeCookie('site_name', { path: '/' });
+                    $.removeCookie('site_site_name', { path: '/' });
+                    $.cookie('select_main', '1', { expires: 2, path: '/' });
+                    window.location.href = "\/";
+                } else {
+                    window.location.href = "\/c/" + this.value;
+                }
+            });
+        })
+    </script>
+
+    <div class="subnav">
+        <ul>
+
+            <li class="first"><a href="/article-list/80/0/1" >最新资讯</a></li>
+
+            <li><a href="/article-list/74/0/1" >真实婚礼</a></li>
+
+            <li><a href="/article-list/70/0/1" class="active">风尚大片</a></li>
+
+            <li><a href="/article-list/75/0/1" >婚礼攻略</a></li>
+
+            <li><a href="/article-list/73/0/1" >人物观点</a></li>
+
+            <li><a href="/article-list/71/0/1" >专题策划</a></li>
+
+            <li><a href="/article-list/72/0/1" >行业快报</a></li>
+
+            <li><a href="/article-list/76/0/1" >风尚活动</a></li>
+
+        </ul>
+    </div>
+    <div class="clearfloat"></div>
+
+    <div class="maincontainer">
+        <div class="article6">
+            <div class="articlelist6">
+                <div class="articlelisttop">
+                    <div class="article_location"><a href="/">首 页</a> &gt; <a href="/articles">资讯</a> &gt; <a href="/article-list/70/0/1">风尚大片</a></div>
+                    <div class="article_qyselect">
+                        <select id="selectcity">
+                            <option value="0">全部区域</option>
+
+                            <option value="11">湖北</option>
+
+                            <option value="12">重庆</option>
+
+                            <option value="13">江苏</option>
+
+                            <option value="14">上海</option>
+
+                            <option value="15">北京</option>
+
+                            <option value="16">广东</option>
+
+                            <option value="17">浙江</option>
+
+                            <option value="18">陕西</option>
+
+                            <option value="19">河南</option>
+
+                            <option value="20">海南</option>
+
+                            <option value="21">山东</option>
+
+                            <option value="22">天津</option>
+
+                            <option value="23">安徽</option>
+
+                            <option value="24">广西</option>
+
+                            <option value="25">四川</option>
+
+                            <option value="26">福建</option>
+
+                            <option value="27">山东</option>
+
+                            <option value="28">黑龙江</option>
+
+                            <option value="29">香港</option>
+
+                            <option value="30">云南</option>
+
+                            <option value="31">沈阳</option>
+
+                            <option value="32">湖南</option>
+
+                            <option value="33">贵州</option>
+
+                            <option value="34">吉林</option>
+
+                            <option value="35">内蒙</option>
+
+                            <option value="36">法国</option>
+
+                            <option value="37">江西</option>
+
+                            <option value="38">山西</option>
+
+                            <option value="95">巴厘岛</option>
+
+                        </select>
+                    </div>
+
+                </div>
+                <ul>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/214959" target="_blank"><img class="lazy" data-original="https://images.weddingvogue.cn/i/1/e9/1e912f93-7c05-11eb-80c4-0242ac170003.jpg" alt="共看明月，同庆元宵！" width="208" height="208" /></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/214959" class="title1" target="_blank">共看明月，同庆元宵！</a></div>
+                            <div class="articlelist6_info title2">2021-02-26 文/告白宇张 图片提供/鱼说视觉</div>
+                            <div class="articlelist6_content">借鉴盛唐时期的配色风格，以高明度水红色搭配天青色，通过色彩互补视觉冲击，体现出色彩的运动感。用一组对比色加上协调色的搭配，使色彩明艳而不失协调，青春时尚又不失个性。</div>
+                            <div class="articlelist6_more"><a href="/articles/214959" target="_blank">READ MORE ></a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/214671" target="_blank"><img class="lazy" data-original="https://images.weddingvogue.cn/i/a/8f/a8f211b7-6bc9-11eb-80c4-0242ac170003.png" alt="婚礼风尚贺岁大片 | &lt;中国新娘·2021&gt;" width="208" height="208" /></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/214671" class="title1" target="_blank">婚礼风尚贺岁大片 | &lt;中国新娘·2021&gt;</a></div>
+                            <div class="articlelist6_info title2">2021-02-11 文/Adam 图片提供/Liverpool陈</div>
+                            <div class="articlelist6_content">穷尽一生也无法走遍中国所有地方，而我们会带着大家去寻找，去发现美。这次我们来到了云南大理，甚至还来到了被老舍称为东方剑桥的喜洲镇。之所以我们愿意不断地探寻，就是想把国内优秀目的地最真最美的一面呈现给大家。</div>
+                            <div class="articlelist6_more"><a href="/articles/214671" target="_blank">READ MORE ></a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/214655" target="_blank"><img class="lazy" data-original="https://images.weddingvogue.cn/i/2/f0/2f06d1aa-69d7-11eb-80c4-0242ac170003.jpg" alt="2014-2020｜重磅人文婚礼大片《中国新娘》年度盘点" width="208" height="208" /></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/214655" class="title1" target="_blank">2014-2020｜重磅人文婚礼大片《中国新娘》年度盘点</a></div>
+                            <div class="articlelist6_info title2">2021-02-08 图文提供/婚礼风尚</div>
+                            <div class="articlelist6_content">《中国新娘》第8年，我们一直在不断创新，力求完美的路上。每年都有这么一群才华横溢的婚礼人，在继承以及延续这个传统项目的特殊意义基础上，赋予中国新娘全新的定义。2021中国新娘已经在云南完成拍摄，大年二十九敬请期待！</div>
+                            <div class="articlelist6_more"><a href="/articles/214655" target="_blank">READ MORE ></a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/214643" target="_blank"><img class="lazy" data-original="https://images.weddingvogue.cn/i/5/2f/52fe6c4e-6911-11eb-80c4-0242ac170003.jpg" alt="婚礼风尚再遇大理，即将呈现爱情里最丰盈的表达！" width="208" height="208" /></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/214643" class="title1" target="_blank">婚礼风尚再遇大理，即将呈现爱情里最丰盈的表达！</a></div>
+                            <div class="articlelist6_info title2">2021-02-07 图文提供/婚礼风尚</div>
+                            <div class="articlelist6_content">2021年婚礼风尚再次集结一线婚礼团队奔赴大理，以更诚心更精进的婚礼创意与人文，为大家呈现全新的&lt;中国新娘 · 2021&gt;。延续婚礼风尚这一具有特殊意义的贺岁传统。亦坚守传承中国文化又接轨时尚的新风貌，以及一种不被约束且内外兼修的中国时尚意境。
+                            </div>
+                            <div class="articlelist6_more"><a href="/articles/214643" target="_blank">READ MORE ></a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                    <li>
+                        <div class="articlelist6_left"><a href="/articles/205994" target="_blank"><img class="lazy" data-original="https://images.weddingvogue.cn/i/7/f2/7f293557-8ac2-11ea-8592-0242ac170003.jpg" alt="感受在三亚谧湾秘境里的浪漫盟约 " width="208" height="208" /></a></div>
+                        <div class="articlelist6_right">
+                            <div class="articlelist6_title"><a href="/articles/205994" class="title1" target="_blank">感受在三亚谧湾秘境里的浪漫盟约 </a></div>
+                            <div class="articlelist6_info title2">2020-04-30 图片提供/千岛视觉</div>
+                            <div class="articlelist6_content">独有的自然风光，独特的城市风情，当爱情表达中让自然、地域文化与时尚碰撞，以经历千年沉淀下来文化为底蕴，三亚，已产生了走向世界的新风向。穿过日夜，越过大海。让无法远行的惆怅，以爱之名的旅行，都在三亚得到安放</div>
+                            <div class="articlelist6_more"><a href="/articles/205994" target="_blank">READ MORE ></a></div>
+                        </div>
+                        <div style="clear:both; font-size:0;"></div>
+                    </li>
+
+                </ul>
+
+
+                <div class="fy">
+                    <div id="pagenav">
+
+                        <span class="page"><a>&lt</a></span>
+
+
+
+
+
+
+
+
+
+                        <span class="page"><a href="/article-list/70/0/1" class="active">1</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/2">2</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/3">3</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/4">4</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/5">5</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/6">6</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/7">7</a></span>
+
+
+
+
+
+                        <span class="page"><span class="dot">...</span></span>
+                        <span class="page"><a href="/article-list/70/0/21">21</a></span>
+
+
+
+                        <span class="page"><a href="/article-list/70/0/2">&gt</a></span>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="articlead1">
+
+            </div>
+        </div>
+        <div style="clear:both; font-size:0;"></div>
+
+    </div>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?1b06b5a7366e3319469bb9e6de2d9c94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+<script type="text/javascript" src="/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("img.lazy").lazyload({ threshold : 200,effect : "fadeIn" });
+        $("#m_article").addClass("active");
+        $('#selectcity').val("0");
+        $('#selectcity').change(function(){
+            location.href='\/article-list/70/' + $(this).find('option:selected').val() + '/1';
+        });
+    })
+</script>
+</body>
+</html>

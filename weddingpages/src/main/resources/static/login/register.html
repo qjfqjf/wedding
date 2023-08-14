@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>婚礼风尚</title>
+    <base href="http://localhost:8081/">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/jquery.bxslider3.css" type="text/css">
+    <script type="text/javascript" src="js/jquery.nice-select.min.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="topcontainer">
+        <div class="top">
+            <div class="toplogo"><a href="/" title="婚礼风尚"id="m_homelogo" class="s_home"><img src="../img/login/logo.png" width="96" height="48" alt="婚礼风尚" /></a></div>
+            <div class="menu menu2">
+                <ul>
+                    <li><a href="../index.html" id="m_home" class="s_home" >首页</a></li>
+                    <li><a href="article/article2.html" id="m_article">资讯</a></li>
+                    <li><a href="picture/picture.html" id="m_pic">婚礼图片</a></li>
+                    <li><a href="video/video.html" id="m_video">婚礼视频</a></li>
+                    <li><a href="city/city.html" id="m_jg">婚礼机构</a></li>
+                    <li><a href="minister/minister.html" id="m_daren">婚礼人</a></li>
+                </ul>
+            </div>
+            <form class="search-form" id="searchForm">
+                <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+                <div class="search-btn"><button><img src="../img/login/search.png" /></button></div>
+            </form>
+            <div class="login" id="userstatus"></div>
+            <div class="site" style="left: 115px;">
+                <select id="select-site" class="nice-select">
+                    <option value="main">全国</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var siteCityId = $.cookie('site_city_id');
+            var siteName = $.cookie('site_site_name');
+            if (siteName && siteCityId) {
+                var sitePath = "c/" + siteName + "/";
+                $('#m_article').attr('href', '\/'+ sitePath +'articles');
+                $('#m_pic').attr('href', '\/'+ sitePath +'pictures');
+                $('#m_video').attr('href', '\/'+ sitePath +'videos');
+                $('#m_jg').attr('href', '\/jigou-city/' + siteCityId);
+                $('#m_daren').attr('href', '\/daren-city/' + siteCityId);
+                $('#m_homelogo').attr('href', '\/'+ sitePath);
+                $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+            }
+            $.get("/check-status", function(data) {
+                if (data=="true") {
+                    $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+                } else {
+                    $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+                }
+            });
+            $("#searchForm").submit(function(){
+                var key = $.trim($("input[name='search']").val());
+                if(key.length > 0){
+                    location.href="/search?key=" + key;
+                }
+                return false;
+            });
+
+            $("#select-site").niceSelect();
+            if (siteName) {
+                $("#select-site").val(siteName);
+                $("#select-site").niceSelect('update');
+            }
+            $("#select-site").on('change', function() {
+                if (this.value === 'main') {
+                    $.removeCookie('site_city_id', { path: '/' });
+                    $.removeCookie('site_id', { path: '/' });
+                    $.removeCookie('site_name', { path: '/' });
+                    $.removeCookie('site_site_name', { path: '/' });
+                    $.cookie('select_main', '1', { expires: 2, path: '/' });
+                    window.location.href = "\/";
+                } else {
+                    window.location.href = "\/c/" + this.value;
+                }
+            });
+        })
+    </script>
+
+    <div class="maincontainer">
+
+        <div align="center">
+            <form class="regForm" id="regForm" method="post" action="">
+                <table width="455" border="0" cellspacing="0" cellpadding="0" class="loginbox">
+                    <tbody>
+                    <tr>
+                        <td width="455" height="80" valign="middle" class="logintitle">
+                            欢迎加入婚礼风尚
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="34"  valign="bottom" class="logintext1">手机号</td>
+                    </tr>
+                    <tr>
+                        <td height="40"  valign="top">
+                            <input name="uname" type="text" class="textinput1" id="uname" maxlength="30" /></td>
+                    </tr>
+                    <tr>
+                        <td height="34"  valign="bottom" class="logintext1">密码</td>
+                    </tr>
+                    <tr>
+                        <td height="40"  valign="top">
+                            <input name="passwd" type="password" class="textinput1" id="passwd" maxlength="30" /></td>
+                    </tr>
+                    <tr>
+                        <td height="34"  valign="bottom" class="logintext1">确认密码</td>
+                    </tr>
+                    <tr>
+                        <td height="40"  valign="top">
+                            <input name="confirm_password" type="password" class="textinput1" id="confirm_password" maxlength="30" /></td>
+                    </tr>
+                    <tr>
+                        <td height="34"  valign="bottom" class="logintext1">验证码</td>
+                    </tr>
+                    <tr>
+                        <td height="40"  valign="top">
+                            <div class="validatecodebox">
+                                <input type="text" name="validatecode" class="textinput1" style="width:345px;" id="validatecode" maxlength="5" /> <img alt="" height="30" width="85" id="verifycode">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="34"  valign="bottom" class="logintext1">手机验证码</td>
+                    </tr>
+                    <tr>
+                        <td height="40"  valign="top">
+                            <div class="validatecodebox">
+                                <input type="text" name="smscaptcha" class="textinput1" style="width:345px;" id="smscaptcha" maxlength="6" /> <span style="margin:0 0 0 10px;cursor: pointer;font-size: 14px;color:#585858;" id="sendsms">发送验证码</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="57" class="logintext1"><input name="agree" type="checkbox" id="checkbox" value="1" checked="checked" />
+                            <label for="checkbox">已经阅读并同意<a href="regagreement" target="_blank">&lt;婚礼风尚服务条款></a> </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <input id="captchatoken" name="captchatoken" type="hidden" value="">
+                        <input id="smscaptchatoken" name="smscaptchatoken" type="hidden" value="">
+                        <td height="57"><input type="submit" id="submit" class="btn1" value="提交注册信息" /></td>
+                    </tr>
+                    <tr>
+                        <td height="67"  valign="bottom">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        <div class="clearfloat"></div>
+
+    </div>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?1b06b5a7366e3319469bb9e6de2d9c94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+<script type="text/javascript" src="/js/hahoo.user.register.js"></script>
+</body>
+</html>

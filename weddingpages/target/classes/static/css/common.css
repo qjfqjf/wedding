@@ -1,0 +1,148 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+body {
+    font-family: microsoft yahei, 微软雅黑, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000;
+}
+
+#container{
+    min-width: 1200px;
+}
+#topad{
+    display: none;
+    margin: 0 auto;
+    width: 1150px;
+}
+#topsmallad{
+    display: block;
+    margin: 0 auto;
+    width: 1150px;
+}
+.topcontainer{
+    width: 100%;
+    height: 47px;
+    background: #f2f2f2;
+    border-bottom: #e3e3e3 1px solid;
+}
+.top{
+
+    width: 1150px;
+    margin: 0 auto;
+    position: relative;
+}
+.site {
+    position: absolute;
+    left: 0;
+    top: 8px;
+}
+
+.nice-select {
+    width: 74px;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    border: solid 1px #e3e3e3;
+    box-sizing: border-box;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: inherit;
+    font-size: 14px;
+    color: #353535;
+    font-weight: normal;
+    height: 32px;
+    line-height: 30px;
+    outline: none;
+    padding-left: 17px;
+    padding-right: 29px;
+    position: relative;
+    text-align: left !important;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: 85px;
+}
+.nice-select .list {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
+    box-sizing: border-box;
+    margin-top: 4px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    -webkit-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transform: scale(0.75) translateY(-21px);
+    -ms-transform: scale(0.75) translateY(-21px);
+    transform: scale(0.75) translateY(-21px);
+    -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+    transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+    z-index: 9;
+}
+.nice-select .option.selected {
+    font-weight: bold;
+}
+.nice-select .option {
+    cursor: pointer;
+    font-weight: 400;
+    line-height: 40px;
+    list-style: none;
+    min-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 29px;
+    text-align: left;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+/*导航菜单*/
+.menu{
+    position: absolute;
+    left: 100px;
+}
+.menu>ul{
+    list-style: none;
+}
+
+.menu>ul>li{
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+}
+a {
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    outline: none;
+}
+.menu ul li a:hover {
+    color: #ff4e7e;
+}
+.menu ul li a {
+    display: block;
+    width: 100px;
+    color: #353535;
+    font-size: 14px;
+}
+.bx-wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    *zoom: 1;
+}

@@ -1,0 +1,13 @@
+cn\wedding\pojo\JiGou.class
+cn\wedding\pojo\VideoType.class
+cn\wedding\pojo\Image.class
+cn\wedding\pojo\Video.class
+cn\wedding\pojo\User.class
+cn\wedding\pojo\WedInfo.class
+cn\wedding\pojo\Picture.class
+cn\wedding\pojo\PictureType.class
+cn\wedding\pojo\vo\ResultVO.class
+cn\wedding\pojo\City.class
+cn\wedding\pojo\Wedding.class
+cn\wedding\pojo\Minister.class
+cn\wedding\pojo\constant\SysCode.class

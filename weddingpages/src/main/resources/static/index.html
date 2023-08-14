@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>婚礼风尚</title>
+  <base href="http://localhost:8081/">
+  <link rel="stylesheet" href="css/test.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <link rel="stylesheet" href="css/jquery.bxslider3.css" type="text/css">
+  <script type="text/javascript" src="js/jquery.nice-select.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="topad" style="margin:0 auto;width:1150px;">
+    <a href="https://www.weddingvogue.cn/pictures/214893" target="_blank">
+      <img src="img/index/1.jpg" alt="" />
+    </a>
+  </div>
+
+
+  <div id="topsmallad" style="margin:0 auto;width:1150px;display:none;">
+    <a href="https://www.weddingvogue.cn/articles/214671" target="_blank">
+      <img src="img/index/2.jpg" alt="" />
+    </a>
+  </div>
+  <div class="topcontainer" style="width:1150px;margin:0 auto;">
+    <div class="top">
+      <div class="site">
+        <div class="nice-select">
+          <span class="current">全国</span>
+          <ul class="list">
+            <li class="option selected" data-value="main">全国</li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/" id="m_home" class="s_home" style="color: #f2f2f2;background-color: #ff4e7e">首页</a></li>
+          <li><a href="article/article2.html" id="m_article">资讯</a></li>
+          <li><a href="picture/picture.html" id="m_pic">婚礼图片</a></li>
+          <li><a href="video/video.html" id="m_video">婚礼视频</a></li>
+          <li><a href="city/city.html" id="m_jg">婚礼机构</a></li>
+          <li><a href="minister/minister.html" id="m_daren">婚礼人</a></li>
+        </ul>
+      </div>
+      <form class="search-form" id="searchForm">
+        <div class="search"><input placeholder="搜索" type="text" value="" name="search"></div>
+        <div class="search-btn"><button><img src="img/index/3.png" /></button></div>
+      </form>
+      <div id="userstatus" class="login">
+        <a href=" login/login.html">登录</a>
+        <a href="login/register.html" style="margin: 0 0 0 12px;">注册</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="headcontainer" style="width:1150px;margin:0 auto;">
+    <div class="head">
+      <div class="logo"><a href="/" title="婚礼风尚" class="s_home"><img src="img/index/4.jpg" width="200" height="82" alt="婚礼风尚" /></a></div>
+
+      <div class="headbanner">
+        <a href="https://www.weddingvogue.cn/articles/197560" target="_blank">
+          <img src="/img/index/5.jpg" />
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="maincontainer">
+    <div id="bigpic" class="hometopbanner_img"></div>
+    <div class="hometopbanner_thumb slider">
+      <ul>
+
+         <li class="first" v-for="pic in picList"><a href="https://www.weddingvogue.cn/pictures/227839" id="slider_0" :data-bimg="pic.path"><img :src="pic.path" width="185" height="104" />
+
+         </a></li>
+        <!--
+        <li><a href="https://www.weddingvogue.cn/pictures/227818" id="slider_1" data-bimg="img/index/bigpic-yulan-1.jpg"><img src="img/index/bigpic-yulan-1.jpg" width="185" height="104" /></a></li>
+
+        <li><a href="https://www.weddingvogue.cn/pictures/227817" id="slider_2" data-bimg="img/index/bigpic-yulan-2.jpg"><img src="img/index/bigpic-yulan-2.jpg" width="185" height="104" /></a></li>
+
+        <li><a href="https://www.weddingvogue.cn/pictures/227821" id="slider_3" data-bimg="img/index/bigpic-yulan-3.jpg"><img src="img/index/bigpic-yulan-3.jpg" width="185" height="104" /></a></li>
+
+        <li><a href="https://www.weddingvogue.cn/pictures/227829" id="slider_4" data-bimg="img/index/bigpic-yulan-4.jpg"><img src="img/index/bigpic-yulan-4.jpg" width="185" height="104" /></a></li>
+
+        <li><a href="https://www.weddingvogue.cn/pictures/227851" id="slider_5" data-bimg="img/index/bigpic-yulan-5.jpg"><img src="img/index/bigpic-yulan-5.jpg" width="185" height="104" /></a></li>
+        -->
+      </ul>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="banner1">
+      <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 340px;">
+        <ul id="slider1" style="width: 415%; position: relative; transition-duration: 0s; transform: translate3d(-2300px, 0px, 0px);">
+          <li style="float: left; list-style: none; position: relative; width: 1150px;" class="bx-clone"><a href="https://www.weddingvogue.cn/articles/217090" target="_blank"><img src="img/index/bigpic2-0.jpg" width="1150"></a></li>
+
+        <li style="float: left; list-style: none; position: relative; width: 1150px;"><a href="https://www.weddingvogue.cn/articles/209533" target="_blank"><img src="img/index/bigpic2-1.jpg" width="1150"></a></li>
+
+</ul></div><div class="bx-controls bx-has-pager"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link">1</a></div><div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link active">2</a></div></div></div></div>
+    </div>
+
+    <div class="infohead">
+      <div class="infotitle"><a href="/articles">Information</a></div>
+      <div class="infomore"><a href="/articles">SEE MORE</a></div>
+      <div class="infotitle2">－ <a href="/articles">最新资讯</a> －</div>
+    </div>
+
+    <div class="infobanner">
+
+      <div class="infobanner1"><a href="https://www.weddingvogue.cn/articles/223506" title="伯妮婚礼策划机构" target="_blank"><img class="lazy" data-original="img/index/infobanner-1.jpg" width="561" height="324" alt="伯妮婚礼策划机构" /></a></div>
+
+      <div class="infobanner2"><a href="https://www.weddingvogue.cn/articles/219832" title="当下即经典" target="_blank"><img class="lazy" data-original="img/index/infobanner-2.jpg" width="561" height="324" alt="当下即经典" /></a></div>
+
+    </div>
+
+    <div class="infolist">
+      <ul>
+
+        <li class="first">
+          <div class="infolist_left">
+            <!--                            连接咨询页-->
+            <a href="" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒"  target="_blank">
+              <img src="img/index/infolist-1.jpg" class="lazy" data-original="img/index/infolist-1.jpg" width="208" height="208" alt="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" style="display: inline;">
+            </a>
+          </div>
+          <div class="infolist_right">
+            <div>
+              <!--                                连接咨询页-->
+              <a href="" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" class="title1" target="_blank">
+                2023亚洲婚礼风尚盛典 | 宴会设计发布 &lt光芒&gt——造景和光影融合而成的光芒
+              </a>
+            </div>
+            <div class="infolist_info title2">文/雁瑜 图片提供/VIC</div>
+            <div class="infolist_content">作为第三次参加亚洲婚礼风尚盛典的设计发布的老朋友，设计师徐丹每一次都交出了一张不一样的答卷。从2019的“借景”到2021的“喻物”，再到今年的“光影”，他试图用不同的方式来体现出设计的多样性。</div>
+            <div class="infolist_more">
+              <!--                                连接咨询页-->
+              <a href="" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 <光芒>——造景和光影融合而成的光芒" target="_blank">
+                READ MORE >
+              </a>
+            </div>
+            <div style="clear:both; font-size:0;"> </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/228067" title="2023亚洲婚礼风尚盛典 | 宴会设计发布<合旋>—— 用动态装置艺术表现灵动的旋转空间" target="_blank"><img  class="lazy" data-original="img/index/infolist-2.jpg" width="208" height="208" alt="2023亚洲婚礼风尚盛典 | 宴会设计发布<合旋>—— 用动态装置艺术表现灵动的旋转空间" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/228067" title="2023亚洲婚礼风尚盛典 | 宴会设计发布 &lt;光芒&gt;——造景和光影融合而成的光芒" class="title1" target="_blank">2023亚洲婚礼风尚盛典 | 宴会设计发布 < 合旋>—— 用动态装置艺术表现灵动的旋转空间</a></div>
+            <div class="infolist_info title2">文/雁瑜 图片提供/yeye</div>
+            <div class="infolist_content">7月10，首次亮相亚洲婚礼风尚盛典宴会设计发布的小棚设计在三亚海棠湾红树林度假酒店的珊瑚宴会厅，为大家带来了一场主题为《合旋》的宴会设计发布。</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/228067" title="2023亚洲婚礼风尚盛典 | 宴会设计发布<合旋>—— 用动态装置艺术表现灵动的旋转空间" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li class="first">
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/227942" title="2023亚洲婚礼风尚盛典 | 宴会设计发布&lt;合旋&gt;—— 用动态装置艺术表现灵动的旋转空间" target="_blank"><img  class="lazy" data-original="img/index/infolist-3.jpg" width="208" height="208" alt="2023亚洲婚礼风尚盛典 | 宴会设计发布&lt;合旋&gt;—— 用动态装置艺术表现灵动的旋转空间" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/227942" title="2023亚洲婚礼风尚盛典 | 宴会设计发布&lt;合旋&gt;—— 用动态装置艺术表现灵动的旋转空间" class="title1" target="_blank">2023亚洲婚礼风尚盛典 | 宴会设计发布&lt;合旋&gt;—— 用动态装置艺术表现灵动的旋转空间</a></div>
+            <div class="infolist_info title2">文/雁瑜 图片提供/yeye</div>
+            <div class="infolist_content">7月10，首次亮相亚洲婚礼风尚盛典宴会设计发布的小棚设计在三亚海棠湾红树林度假酒店的珊瑚宴会厅，为大家带来了一场主题为《合旋》的宴会设计发布。</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/227942" title="2023亚洲婚礼风尚盛典 | 宴会设计发布&lt;合旋&gt;—— 用动态装置艺术表现灵动的旋转空间" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li>
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/227777" title="真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场" target="_blank"><img  class="lazy" data-original="img/index/infolist-4.jpg" width="208" height="208" alt="真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/227777" title="真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场" class="title1" target="_blank">真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场</a></div>
+            <div class="infolist_info title2">文/鲸微 图片提供/百特婚礼</div>
+            <div class="infolist_content">蝴蝶总会被玫瑰吸引，像极了唐梓与康康的爱情。曝光量达10亿次！来康康千万级红人【唐梓和大魔王呸】的婚礼现场！</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/227777" title="真实婚礼 | 来看全网都在追的甜系CP「唐梓&amp;康康」的婚礼现场" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li class="first">
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" target="_blank"><img  class="lazy" data-original="img/index/infolist-5.jpg" width="208" height="208" alt="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" class="title1" target="_blank">人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制</a></div>
+            <div class="infolist_info title2"> 文/雁瑜 图片提供/IMS wedding無际创意</div>
+            <div class="infolist_content">一家致力于为客户提供定制服务，婚礼创意，婚礼布置设计，婚礼流程策划的定制婚礼企划品牌。</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/227773" title="人物观点 | IMS wedding無际创意：让婚礼充满故事，每一场婚礼都不可复制" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li>
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/227301" title="风尚活动 | 「2023亚洲婚礼风尚盛典」主创团队想和你聊聊~" target="_blank"><img  class="lazy" data-original="img/index/infolist-6.jpg" width="208" height="208" alt="风尚活动 | 「2023亚洲婚礼风尚盛典」主创团队想和你聊聊~" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/227301" title="风尚活动 | 「2023亚洲婚礼风尚盛典」主创团队想和你聊聊~" class="title1" target="_blank">风尚活动 | 「2023亚洲婚礼风尚盛典」主创团队想和你聊聊~</a></div>
+            <div class="infolist_info title2"> 图文提供/婚礼风尚</div>
+            <div class="infolist_content">这个7月，让我们一起燃爆三亚！『燃UP』</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/227301" title="风尚活动 | 「2023亚洲婚礼风尚盛典」主创团队想和你聊聊~" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li class="first">
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/226926" title=" 真实婚礼 | 于云深不知处，寻得圆满" target="_blank"><img  class="lazy" data-original="img/index/infolist-7.jpg" width="208" height="208" alt=" 真实婚礼 | 于云深不知处，寻得圆满" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/226926" title=" 真实婚礼 | 于云深不知处，寻得圆满" class="title1" target="_blank"> 真实婚礼 | 于云深不知处，寻得圆满</a></div>
+            <div class="infolist_info title2">文/雁瑜 图片提供/百特婚礼</div>
+            <div class="infolist_content">当钢筋水泥的欲望，变成青山绿水的念想，不妨跟着百特婚礼一起在杭州法云安缦开启了一场【云深不知处】的心灵修行之旅</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/226926" title=" 真实婚礼 | 于云深不知处，寻得圆满" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+        <li>
+          <div class="infolist_left"><a href="https://www.weddingvogue.cn/articles/226519" title="风尚活动 | 宴会设计发布《凤至尚》—— 以民族文化的眼光丈量世界" target="_blank"><img  class="lazy" data-original="img/index/infolist-8.jpg" width="208" height="208" alt="风尚活动 | 宴会设计发布《凤至尚》—— 以民族文化的眼光丈量世界" /></a></div>
+          <div class="infolist_right">
+            <div><a href="https://www.weddingvogue.cn/articles/226519" title="风尚活动 | 宴会设计发布《凤至尚》—— 以民族文化的眼光丈量世界" class="title1" target="_blank">风尚活动 | 宴会设计发布《凤至尚》—— 以民族文化的眼光丈量世界</a></div>
+            <div class="infolist_info title2"> 文/雁瑜 图片提供/LeePangPhoto</div>
+            <div class="infolist_content">为来自全国各地的婚礼人，呈现一场民族文化盛宴，让民族文化在新的时代焕发无穷魅力，让民族的才是世界的，不止于口号，更在每一次设计中表达的淋漓尽致。</div>
+            <div class="infolist_more"><a href="https://www.weddingvogue.cn/articles/226519" title="风尚活动 | 宴会设计发布《凤至尚》—— 以民族文化的眼光丈量世界" target="_blank">READ MORE ></a></div>
+          </div>
+          <div style="clear:both; font-size:0;"></div>
+        </li>
+
+      </ul>
+      <div style="clear:both; font-size:0;"></div>
+    </div>
+
+
+
+    <div class="infohead">
+      <div class="infotitle"><a href="/pictures">Wedding Photo</a></div>
+      <div class="infomore"><a href="/pictures">SEE MORE</a></div>
+      <div class="infotitle2">－ <a href="/pictures">婚礼图片</a> －</div>
+    </div>
+
+    <div class="piclist">
+      <ul>
+
+        <li class="first">
+          <div class="piclist_pic"><a href="https://www.weddingvogue.cn/pictures/227871" title="不完美作品" target="_blank"><img class="lazy" data-original="img/index/piclist-1.jpg" alt="不完美作品" width="366" height="480" /></a></div>
+          <div class="piclist_title"><a href="https://www.weddingvogue.cn/pictures/227871" title="不完美作品" class="title1" target="_blank">不完美作品</a></div>
+          <div class="piclist_info title2"><a href="https://www.weddingvogue.cn/daren/942" class="title2" target="_blank">Tutu</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic"><a href="https://www.weddingvogue.cn/pictures/227901" title="重塑" target="_blank"><img class="lazy" data-original="img/index/piclist-2.jpg" alt="重塑" width="366" height="480" /></a></div>
+          <div class="piclist_title"><a href="https://www.weddingvogue.cn/pictures/227901" title="重塑" class="title1" target="_blank">重塑</a></div>
+          <div class="piclist_info title2"><a href="https://www.weddingvogue.cn/jg/344" class="title2" target="_blank">皇后婚礼企划</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic"><a href="https://www.weddingvogue.cn/pictures/227891" title="如初" target="_blank"><img class="lazy" data-original="img/index/piclist-3.jpg" alt="如初" width="366" height="480" /></a></div>
+          <div class="piclist_title"><a href="https://www.weddingvogue.cn/pictures/227891" title="如初" class="title1" target="_blank">如初</a></div>
+          <div class="piclist_info title2"><a href="https://www.weddingvogue.cn/jg/290" class="title2" target="_blank">爱禧会婚礼定制</a></div>
+        </li>
+
+      </ul>
+      <div style="clear:both; font-size:0;"></div>
+    </div>
+
+    <div class="piclist2" style="margin:0;">
+      <ul>
+
+        <li class="first">
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/223536" title="内在关系" target="_blank"><img class="lazy" data-original="img/index/piclist2-1.jpg" alt="内在关系" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/223536" title="内在关系" class="title1" target="_blank">内在关系</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/344" class="title2" target="_blank">皇后婚礼企划</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218774" title="一万片落叶" target="_blank"><img class="lazy" data-original="img/index/piclist2-2.jpg" alt="一万片落叶" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218774" title="一万片落叶" class="title1" target="_blank">一万片落叶</a></div>
+          <div class="piclist_info2"><a href="" class="title2" target="_blank">好事House</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/222929" title="无极" target="_blank"><img class="lazy" data-original="img/index/piclist2-3.jpg" alt="无极" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/222929" title="无极" class="title1" target="_blank">无极</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/250" class="title2" target="_blank">梦的起点婚礼设计</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218958" title="无尽的爱" target="_blank"><img class="lazy" data-original="img/index/piclist2-4.jpg" alt="无尽的爱" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218958" title="无尽的爱" class="title1" target="_blank">无尽的爱</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/221" class="title2" target="_blank">三亚御婚礼</a></div>
+        </li>
+
+        <li class="first">
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/222326" title="洁净纯然" target="_blank"><img class="lazy" data-original="img/index/piclist2-5.jpg" alt="洁净纯然" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/222326" title="洁净纯然" class="title1" target="_blank">洁净纯然</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/344" class="title2" target="_blank">皇后婚礼企划</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218951" title="La Muralla Roja" target="_blank"><img class="lazy" data-original="img/index/piclist2-6.jpg" alt="La Muralla Roja" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218951" title="La Muralla Roja" class="title1" target="_blank">La Muralla Roja</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/89" class="title2" target="_blank">三亚汇爱婚礼</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/217495" title="告白" target="_blank"><img class="lazy" data-original="img/index/piclist2-7.jpg" alt="告白" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/217495" title="告白" class="title1" target="_blank">告白</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/346" class="title2" target="_blank">CHOCO-启蔻婚礼（三亚）</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218948" title="白日梦想" target="_blank"><img class="lazy" data-original="img/index/piclist2-8.jpg" alt="白日梦想" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218948" title="白日梦想" class="title1" target="_blank">白日梦想</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/89" class="title2" target="_blank">三亚汇爱婚礼</a></div>
+        </li>
+
+        <li class="first">
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218341" title="有幸遇见 恰好合拍" target="_blank"><img class="lazy" data-original="img/index/piclist2-9.jpg" alt="有幸遇见 恰好合拍" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218341" title="有幸遇见 恰好合拍" class="title1" target="_blank">有幸遇见 恰好合拍</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/894" class="title2" target="_blank">花醉</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/215374" title="Chapel Wedding意境之约" target="_blank"><img class="lazy" data-original="img/index/piclist2-10.jpg" alt="Chapel Wedding意境之约" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/215374" title="Chapel Wedding意境之约" class="title1" target="_blank">Chapel Wedding意境之约</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/282" class="title2" target="_blank">LoveShare爱享</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/214218" title="Gravity" target="_blank"><img class="lazy" data-original="img/index/piclist2-11.jpg" alt="Gravity" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/214218" title="Gravity" class="title1" target="_blank">Gravity</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/220" class="title2" target="_blank">也地婚尚</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/209763" title="未来永远热泪盈眶" target="_blank"><img class="lazy" data-original="img/index/piclist2-12.jpg" alt="未来永远热泪盈眶" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/209763" title="未来永远热泪盈眶" class="title1" target="_blank">未来永远热泪盈眶</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/daren/485" class="title2" target="_blank">Dane 邵单骑</a></div>
+        </li>
+
+        <li class="first">
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/219007" title="Pure Dream Boundary" target="_blank"><img class="lazy" data-original="img/index/piclist2-13.jpg" alt="Pure Dream Boundary" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/219007" title="Pure Dream Boundary" class="title1" target="_blank">Pure Dream Boundary</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/daren/880" class="title2" target="_blank">Jacky</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218663" title="回忆之城" target="_blank"><img class="lazy" data-original="img/index/piclist2-14.jpg" alt="回忆之城" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218663" title="回忆之城" class="title1" target="_blank">回忆之城</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/213" class="title2" target="_blank">三色锦婚礼定制</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/216467" title="MAN ON THE MOON" target="_blank"><img class="lazy" data-original="img/index/piclist2-15.jpg" alt="MAN ON THE MOON" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/216467" title="MAN ON THE MOON" class="title1" target="_blank">MAN ON THE MOON</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/152" class="title2" target="_blank">WE梦旅人婚礼定制</a></div>
+        </li>
+
+        <li>
+          <div class="piclist_pic2"><a href="https://www.weddingvogue.cn/pictures/218769" title="Honou" target="_blank"><img class="lazy" data-original="img/index/piclist2-16.jpg" alt="Honou" width="278" height="404" /></a></div>
+          <div class="piclist_title2"><a href="https://www.weddingvogue.cn/pictures/218769" title="Honou" class="title1" target="_blank">Honou</a></div>
+          <div class="piclist_info2"><a href="https://www.weddingvogue.cn/jg/345" class="title2" target="_blank">CHOCO-启蔻婚礼（北京）</a></div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="line"></div>
+
+
+
+    <div class="infohead">
+      <div class="infotitle"><a href="/videos">Wedding Video</a></div>
+      <div class="infomore"><a href="/videos">SEE MORE</a></div>
+      <div class="infotitle2">－ <a href="/videos">婚礼视频</a> －</div>
+    </div>
+
+    <div class="videobanner">
+      <ul class="roundabout-holder" style="padding: 0px; position: relative;">
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: 711px; top: 63px; width: 651.533px; height: 330.767px; opacity: 0.57; z-index: 151; font-size: 8.6px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/214892" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-1.jpg" src="img/index/videobanner-1.jpg" style="display: inline;">
+          </a>
+        </li>
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: 337px; top: 90px; width: 547.838px; height: 278.124px; opacity: 0.4; z-index: 100; font-size: 7.2px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/220272" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-2.jpg" src="img/index/videobanner-2.jpg" style="display: inline;">
+          </a>
+        </li>
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: -169px; top: 70px; width: 625.814px; height: 317.711px; opacity: 0.53; z-index: 139; font-size: 8.2px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/209759" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-3.jpg" src="img/index/videobanner-3.jpg" style="display: inline;">
+          </a>
+        </li>
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: -302px; top: 24px; width: 807.667px; height: 410.033px; opacity: 0.83; z-index: 229; font-size: 10.6px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/221634" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-4.jpg" src="img/index/videobanner-4.jpg" style="display: inline;">
+          </a>
+        </li>
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: 71px; top: -3px; width: 911.362px; height: 462.676px; opacity: 1; z-index: 280; font-size: 12px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/222256" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-5.jpg" src="img/index/videobanner-5.jpg" style="display: inline;">
+          </a>
+        </li>
+
+        <li class="roundabout-moveable-item" style="position: absolute; left: 578px; top: 17px; width: 833.386px; height: 423.089px; opacity: 0.87; z-index: 241; font-size: 11px;">
+          <!--                        连接视频-->
+          <a href="https://www.weddingvogue.cn/videos/193915" target="_blank">
+            <img class="lazy" data-original="img/index/videobanner-6.jpg" src="img/index/videobanner-6.jpg" style="display: inline;">
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="videolist">
+      <ul>
+
+        <li class="first">
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218090" title="2021婚礼风尚影像节" target="_blank"><img  class="lazy" data-original="img/index/videolist-1.jpg" alt="2021婚礼风尚影像节" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218090" title="2021婚礼风尚影像节" class="title1" target="_blank">2021婚礼风尚影像节</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218089" title="影像节作品集锦 | 2021" target="_blank"><img  class="lazy" data-original="img/index/videolist-2.jpg" alt="影像节作品集锦 | 2021" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218089" title="影像节作品集锦 | 2021" class="title1" target="_blank">影像节作品集锦 | 2021</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218082" title="成视 | 设计师合集视频" target="_blank"><img  class="lazy" data-original="img/index/videolist-3.jpg" alt="成视 | 设计师合集视频" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218082" title="成视 | 设计师合集视频" class="title1" target="_blank">成视 | 设计师合集视频</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218081" title="理遇" target="_blank"><img  class="lazy" data-original="img/index/videolist-4.jpg" alt="理遇" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218081" title="理遇" class="title1" target="_blank">理遇</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/" title="婚礼风尚" class="title2" target="_blank">婚礼风尚</a></div>
+        </li>
+
+        <li class="first">
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218510" title="张晓光的野奢之旅" target="_blank"><img  class="lazy" data-original="img/index/videolist-5.jpg" alt="张晓光的野奢之旅" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218510" title="张晓光的野奢之旅" class="title1" target="_blank">张晓光的野奢之旅</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/692" title="菲宁视觉" class="title2" target="_blank">菲宁视觉</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/209710" title="Blue DUDU" target="_blank"><img  class="lazy" data-original="img/index/videolist-6.jpg" alt="Blue DUDU" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/209710" title="Blue DUDU" class="title1" target="_blank">Blue DUDU</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/878" title="REAL的FILM" class="title2" target="_blank">REAL的FILM</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/213439" title="你是我最大的冒险" target="_blank"><img  class="lazy" data-original="img/index/videolist-7.jpg" alt="你是我最大的冒险" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/213439" title="你是我最大的冒险" class="title1" target="_blank">你是我最大的冒险</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/692" title=" 菲宁视觉" class="title2" target="_blank"> 菲宁视觉</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/jg/342" title="梅里雪山" target="_blank"><img  class="lazy" data-original="img/index/videolist-8.jpg" alt="梅里雪山" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/jg/342" title="梅里雪山" class="title1" target="_blank">梅里雪山</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/daren/380" title="绯系视觉" class="title2" target="_blank">绯系视觉</a></div>
+        </li>
+
+        <li class="first">
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218515" title="舞至黎明" target="_blank"><img  class="lazy" data-original="img/index/videolist-9.jpg" alt="舞至黎明" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218515" title="舞至黎明" class="title1" target="_blank">舞至黎明</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/86" title="GoldenLove Production" class="title2" target="_blank">GoldenLove Production</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/218621" title="华尔道夫韩式婚礼" target="_blank"><img  class="lazy" data-original="img/index/videolist-10.jpg" alt="华尔道夫韩式婚礼" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/218621" title="华尔道夫韩式婚礼" class="title1" target="_blank">华尔道夫韩式婚礼</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/342" title="绯系视觉" class="title2" target="_blank">绯系视觉</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/217914" title="三亚艾迪逊婚礼" target="_blank"><img  class="lazy" data-original="img/index/videolist-11.jpg" alt="三亚艾迪逊婚礼" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/217914" title="三亚艾迪逊婚礼" class="title1" target="_blank">三亚艾迪逊婚礼</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/257" title="根号肆电影工作室" class="title2" target="_blank">根号肆电影工作室</a></div>
+        </li>
+
+        <li>
+          <div class="videolist_pic"><a href="https://www.weddingvogue.cn/videos/217137" title="520，只想被爱情种草" target="_blank"><img  class="lazy" data-original="img/index/videolist-12.jpg" alt="520，只想被爱情种草" width="285" height="169" /></a></div>
+          <div class="videolist_title"><a href="https://www.weddingvogue.cn/videos/217137" title="520，只想被爱情种草" class="title1" target="_blank">520，只想被爱情种草</a></div>
+          <div class="videolist_info"><a href="https://www.weddingvogue.cn/jg/211" title="曼可瑞尔" class="title2" target="_blank">曼可瑞尔</a></div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="line"></div>
+
+
+
+    <div class="infohead">
+      <div class="infotitle"><a href="/jigou">Wedding Vendor</a></div>
+      <div class="infomore"><a href="/jigou">SEE MORE</a></div>
+      <div class="infotitle2">－ <a href="/jigou">婚礼机构</a> －</div>
+    </div>
+
+    <div class="jglist">
+      <ul>
+
+
+        <li class="first"><a href="/jigou-city/1" target="_blank">上海</a></li>
+
+        <li><a href="/jigou-city/2" target="_blank">北京</a></li>
+
+        <li><a href="/jigou-city/3" target="_blank">广东</a></li>
+
+        <li><a href="/jigou-city/4" target="_blank">浙江</a></li>
+
+        <li><a href="/jigou-city/5" target="_blank">江苏</a></li>
+
+        <li><a href="/jigou-city/11" target="_blank">四川</a></li>
+
+        <li><a href="/jigou-city/10" target="_blank">重庆</a></li>
+
+        <li><a href="/jigou-city/7" target="_blank">福建</a></li>
+
+        <li><a href="/jigou-city/9" target="_blank">山东</a></li>
+
+        <li><a href="/jigou-city/8" target="_blank">海南</a></li>
+
+        <li class="first"><a href="/jigou-city/12" target="_blank">安徽</a></li>
+
+        <li><a href="/jigou-city/6" target="_blank">河南</a></li>
+
+        <li><a href="/jigou-city/20" target="_blank">贵州</a></li>
+
+        <li><a href="/jigou-city/19" target="_blank">黑龙江</a></li>
+
+        <li><a href="/jigou-city/15" target="_blank">天津</a></li>
+
+        <li><a href="/jigou-city/16" target="_blank">广西</a></li>
+
+        <li><a href="/jigou-city/13" target="_blank">湖北</a></li>
+
+        <li><a href="/jigou-city/18" target="_blank">香港</a></li>
+
+        <li><a href="/jigou-city/21" target="_blank">法国</a></li>
+
+        <li><a href="/jigou-city/22" target="_blank">云南</a></li>
+
+        <li class="first"><a href="/jigou-city/23" target="_blank">辽宁</a></li>
+
+        <li><a href="/jigou-city/24" target="_blank">湖南</a></li>
+
+        <li><a href="/jigou-city/25" target="_blank">江西</a></li>
+
+        <li><a href="/jigou-city/26" target="_blank">巴厘岛</a></li>
+
+        <li><a href="/jigou-city/27" target="_blank">吉林</a></li>
+
+        <li><a href="/jigou-city/28" target="_blank">内蒙</a></li>
+
+        <li><a href="/jigou-city/29" target="_blank">山西</a></li>
+
+        <li><a href="/jigou-city/30" target="_blank">河北</a></li>
+
+
+      </ul>
+      <div style="clear:both; font-size:0px;"></div>
+    </div>
+
+    <div class="jgbanner">
+      <div id="bigpic2" class="jgbanner_img"></div>
+      <div class="jgbanner_thumb slider2">
+        <ul>
+
+          <li class="first"><a href="https://www.weddingvogue.cn/pictures/223892" id="slider2_0" data-bimg="https://images.weddingvogue.cn/i/f/76/f7695405-6f01-11ed-bed8-0242ac140004.jpg"><img src="img/index/jgbanner-1.jpg" width="172" height="92" /></a></li>
+
+          <li><a href="https://www.weddingvogue.cn/pictures/223812" id="slider2_1" data-bimg="https://images.weddingvogue.cn/i/6/4e/64edea66-6f02-11ed-bed8-0242ac140004.jpg"><img src="img/index/jgbanner-2.jpg" width="172" height="92" /></a></li>
+
+          <li><a href="https://www.weddingvogue.cn/pictures/223785" id="slider2_2" data-bimg="https://images.weddingvogue.cn/i/0/e3/0e3233f9-6f02-11ed-bed8-0242ac140004.jpg"><img src="img/index/jgbanner-3.jpg" width="172" height="92" /></a></li>
+
+          <li><a href="https://www.weddingvogue.cn/pictures/223950" id="slider2_3" data-bimg="https://images.weddingvogue.cn/i/9/ef/9ef05036-6f02-11ed-bed8-0242ac140004.jpg"><img src="img/index/jgbanner-4.jpg" width="172" height="92" /></a></li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="jglist2">
+      <ul>
+
+        <li class="first">
+          <div class="jglist2_pic"><a href="https://www.weddingvogue.cn/jg/914" title="RealWedding" target="_blank"><img class="lazy" data-original="img/index/jglist2-1.jpg" alt="RealWedding" width="272" height="175" /></a></div>
+          <div class="jglist2_title"><a href="https://www.weddingvogue.cn/jg/914" title="RealWedding" class="title1" target="_blank">RealWedding</a></div>
+        </li>
+
+        <li>
+          <div class="jglist2_pic"><a href="https://www.weddingvogue.cn/jg/330" title="WeddingWind婚礼风" target="_blank"><img class="lazy" data-original="img/index/jglist2-2.jpg" alt="WeddingWind婚礼风" width="272" height="175" /></a></div>
+          <div class="jglist2_title"><a href="https://www.weddingvogue.cn/jg/330" title="WeddingWind婚礼风" class="title1" target="_blank">WeddingWind婚礼风</a></div>
+        </li>
+
+        <li>
+          <div class="jglist2_pic"><a href="https://www.weddingvogue.cn/jg/113" title="百特婚礼" target="_blank"><img class="lazy" data-original="img/index/jglist2-3.jpg" alt="百特婚礼" width="272" height="175" /></a></div>
+          <div class="jglist2_title"><a href="https://www.weddingvogue.cn/jg/113" title="百特婚礼" class="title1" target="_blank">百特婚礼</a></div>
+        </li>
+
+        <li>
+          <div class="jglist2_pic"><a href="http://www.weddingvogue.cn/jg/250" title=" 梦的起点婚礼设计" target="_blank"><img class="lazy" data-original="img/index/jglist2-4.jpg" alt=" 梦的起点婚礼设计" width="272" height="175" /></a></div>
+          <div class="jglist2_title"><a href="http://www.weddingvogue.cn/jg/250" title=" 梦的起点婚礼设计" class="title1" target="_blank"> 梦的起点婚礼设计</a></div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="line"></div>
+
+
+
+    <div class="infohead">
+      <div class="infotitle"><a href="/daren">Wedding Professional</a></div>
+      <div class="infomore"><a href="/daren">SEE MORE</a></div>
+      <div class="infotitle2">－ <a href="/daren">婚礼人</a> －</div>
+    </div>
+
+    <div class="darenlist">
+      <ul>
+
+
+        <li class="first"><a href="/daren-city/1" target="_blank">上海</a></li>
+
+        <li><a href="/daren-city/2" target="_blank">北京</a></li>
+
+        <li><a href="/daren-city/3" target="_blank">广东</a></li>
+
+        <li><a href="/daren-city/4" target="_blank">浙江</a></li>
+
+        <li><a href="/daren-city/5" target="_blank">江苏</a></li>
+
+        <li><a href="/daren-city/11" target="_blank">四川</a></li>
+
+        <li><a href="/daren-city/10" target="_blank">重庆</a></li>
+
+        <li><a href="/daren-city/7" target="_blank">福建</a></li>
+
+        <li><a href="/daren-city/9" target="_blank">山东</a></li>
+
+        <li><a href="/daren-city/8" target="_blank">海南</a></li>
+
+        <li class="first"><a href="/daren-city/12" target="_blank">安徽</a></li>
+
+        <li><a href="/daren-city/6" target="_blank">河南</a></li>
+
+        <li><a href="/daren-city/20" target="_blank">贵州</a></li>
+
+        <li><a href="/daren-city/19" target="_blank">黑龙江</a></li>
+
+        <li><a href="/daren-city/15" target="_blank">天津</a></li>
+
+        <li><a href="/daren-city/16" target="_blank">广西</a></li>
+
+        <li><a href="/daren-city/13" target="_blank">湖北</a></li>
+
+        <li><a href="/daren-city/18" target="_blank">香港</a></li>
+
+        <li><a href="/daren-city/21" target="_blank">法国</a></li>
+
+        <li><a href="/daren-city/22" target="_blank">云南</a></li>
+
+        <li class="first"><a href="/daren-city/23" target="_blank">辽宁</a></li>
+
+        <li><a href="/daren-city/24" target="_blank">湖南</a></li>
+
+        <li><a href="/daren-city/25" target="_blank">江西</a></li>
+
+        <li><a href="/daren-city/26" target="_blank">巴厘岛</a></li>
+
+        <li><a href="/daren-city/27" target="_blank">吉林</a></li>
+
+        <li><a href="/daren-city/28" target="_blank">内蒙</a></li>
+
+        <li><a href="/daren-city/29" target="_blank">山西</a></li>
+
+        <li><a href="/daren-city/30" target="_blank">河北</a></li>
+
+
+      </ul>
+      <div style="clear:both; font-size:0px;"></div>
+    </div>
+
+    <div class="darenlist2">
+      <ul>
+
+        <li class="first">
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/634" title="宴会设计师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-1.jpg" alt="赖梓愈Caleb RAI" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/634" title="赖梓愈Caleb RAI" class="title1" target="_blank">赖梓愈Caleb RAI</a></div>
+          <div class="darenlist2_info title2">宴会设计师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/880" title="宴会设计师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-2.jpg" alt="Jacky" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/880" title="Jacky" class="title1" target="_blank">Jacky</a></div>
+          <div class="darenlist2_info title2">宴会设计师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/527" title="婚礼主持人" target="_blank"><img class="lazy" data-original="img/index/darenlist2-3.jpg" alt="林欣" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/527" title="林欣" class="title1" target="_blank">林欣</a></div>
+          <div class="darenlist2_info title2">婚礼主持人</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/377" title="婚礼主持人" target="_blank"><img class="lazy" data-original="img/index/darenlist2-4.jpg" alt="王瑱" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/377" title="王瑱" class="title1" target="_blank">王瑱</a></div>
+          <div class="darenlist2_info title2">婚礼主持人</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/459" title="婚礼主持人" target="_blank"><img class="lazy" data-original="img/index/darenlist2-5.jpg" alt="张晓光" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/459" title="张晓光" class="title1" target="_blank">张晓光</a></div>
+          <div class="darenlist2_info title2">婚礼主持人</div>
+        </li>
+
+        <li class="first">
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/895" title="宴会设计师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-6.jpg" alt="张球Wynne.Z" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/895" title="张球Wynne.Z" class="title1" target="_blank">张球Wynne.Z</a></div>
+          <div class="darenlist2_info title2">宴会设计师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/899" title="婚礼化妆师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-7.jpg" alt="晓莉" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/899" title="晓莉" class="title1" target="_blank">晓莉</a></div>
+          <div class="darenlist2_info title2">婚礼化妆师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/485" title="婚礼摄影师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-8.jpg" alt="Dane 邵单骑" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/485" title="Dane 邵单骑" class="title1" target="_blank">Dane 邵单骑</a></div>
+          <div class="darenlist2_info title2">婚礼摄影师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/755" title="宴会设计师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-9.jpg" alt="Leon" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/755" title="Leon" class="title1" target="_blank">Leon</a></div>
+          <div class="darenlist2_info title2">宴会设计师</div>
+        </li>
+
+        <li>
+          <div class="darenlist2_pic"><a href="https://www.weddingvogue.cn/daren/534" title="宴会设计师" target="_blank"><img class="lazy" data-original="img/index/darenlist2-10.jpg" alt="石鹏" width="222" height="222" /></a></div>
+          <div class="darenlist2_title"><a href="https://www.weddingvogue.cn/daren/534" title="石鹏" class="title1" target="_blank">石鹏</a></div>
+          <div class="darenlist2_info title2">宴会设计师</div>
+        </li>
+
+      </ul>
+    </div>
+    <div style="clear:both; font-size:0px;"></div>
+
+  </div>
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1b06b5a7366e3319469bb9e6de2d9c94";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</div>
+<script type="text/javascript" src="/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/hahooslider.js"></script>
+<script type="text/javascript" src="/js/jquery.roundabout.min.js"></script>
+<script src="/js/jquery.bxslider.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+<script src="/js/vue/vue.js"></script>
+<script src="/js/vue/axios.min.js"></script>
+</body>
+<script type="text/javascript">
+  $(function(){
+    $("img.lazy").lazyload({ threshold : 400,effect : "fadeIn" });
+    $("#m_home").addClass("active");
+    $('.slider').hahooSlider({bigpic:"#bigpic", lname:"slider"});
+    $('.slider2').hahooSlider({bigpic:"#bigpic2", lname:"slider2"});
+    $('.videobanner ul').roundabout({minScale:0.6,autoplay:true,autoplayDuration:3000,autoplayPauseOnHover:true});
+
+    $.get("/check-status", function(data) {
+      if (data=="true") {
+        $("#userstatus").html('<a href="\/userhome" style="margin:0 0 0 12px;">会员中心</a><a href="\/logout" style="margin:0 0 0 12px;">退出</a>');
+      } else {
+        $("#userstatus").html('<a href="\/login">登录</a><a href="\/register" style="margin:0 0 0 12px;">注册</a>')
+      }
+    });
+
+    setTimeout(function(){
+      $("#topad").slideUp(1000,function(){$("#topsmallad").slideDown(1000);});
+    },3000);
+
+    $('#slider1').bxSlider({
+
+      controls:false,
+      auto: true,
+      pause: 4000
+    });
+
+    $("#searchForm").submit(function(){
+      var key = $.trim($("input[name='search']").val());
+      if(key.length > 0){
+        location.href="/search?key=" + key;
+      }
+      return false;
+    });
+
+    var siteName = $.cookie('site_site_name');
+    if (siteName) {
+      var sitePath = "c/" + siteName + "/";
+      $('.s_home').attr('href', '\/'+ sitePath.substring(0, sitePath.length - 1));
+    }
+
+    $("#select-site").niceSelect();
+    if (siteName) {
+      $("#select-site").val(siteName);
+      $("#select-site").niceSelect('update');
+    }
+    $("#select-site").on('change', function() {
+      if (this.value === 'main') {
+        $.removeCookie('site_city_id', { path: '/' });
+        $.removeCookie('site_id', { path: '/' });
+        $.removeCookie('site_name', { path: '/' });
+        $.removeCookie('site_site_name', { path: '/' });
+        $.cookie('select_main', '1', { expires: 2, path: '/' });
+        window.location.href = "\/";
+      } else {
+        window.location.href = "\/c/" + this.value;
+      }
+    });
+  })
+</script>
+<script>
+  let vm = new Vue({
+    el:'#container',
+    data:{
+      picList:[]
+    },
+    mounted(){
+
+        this.getPictureByWeddingId();
+    },
+    methods:{
+      getPictureByWeddingId(){
+          console.log('发起异步请求！！！')
+          let that = this;
+          axios.get('http://localhost:8082/image/t1').then(function (res){
+
+            that.picList = res.data.data;
+           
+            console.log(res.data.data)
+         });
+      }
+    }
+  })
+</script>
+</html>

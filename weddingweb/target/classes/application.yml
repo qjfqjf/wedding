@@ -1,0 +1,31 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.115.203.11:3306/wedding?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      pool-name: weddingpool
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  servlet:
+    multipart:
+      max-request-size: 3000MB
+      max-file-size: 30MB
+
+minio:
+  endpoint: http://192.168.138.3:9000
+  accesskey: admin
+  secretkey: admin123456
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
