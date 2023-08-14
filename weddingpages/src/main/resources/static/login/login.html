@@ -115,16 +115,16 @@
                         <td height="40" colspan="2" valign="top">
                             <input type="password" name="passwd" class="textinput1" id="passwd" /></td>
                     </tr>
-                    <tr>
-                        <td height="34" colspan="2" valign="bottom" class="logintext1">验证码</td>
-                    </tr>
-                    <tr>
-                        <td height="40" colspan="2" valign="top">
-                            <div class="validatecodebox">
-                                <input type="text" name="validatecode" class="textinput1" style="width:345px;" id="validatecode" maxlength="5" /> <img alt="" height="30" width="85" id="verifycode">
-                            </div>
-                        </td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td height="34" colspan="2" valign="bottom" class="logintext1">验证码</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td height="40" colspan="2" valign="top">-->
+<!--                            <div class="validatecodebox">-->
+<!--                                <input type="text" name="validatecode" class="textinput1" style="width:345px;" id="validatecode" maxlength="5" /> <img alt="" height="30" width="85" id="verifycode">-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     <tr>
                         <input id="captchatoken" name="captchatoken" type="hidden" value="">
                         <td height="57" colspan="2" valign="bottom"><input type="submit" id="submit" class="btn1" value="立即登录" /></td>
@@ -153,6 +153,50 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
+
+        $(document).ready(function() {
+            $("#loginForm").submit(function(event) {
+                event.preventDefault();
+
+                var username = $("#uname").val();
+                var password = $("#passwd").val();
+
+                if (username === "" || password === "") {
+                    alert("请输入用户名和密码。");
+                    return;
+                }
+                //登录请求
+                $.ajax({
+                    url: "http://localhost:8082/login",
+                    method: "POST",
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function(res) {
+                        console.log(res)
+                        if (res.code === "20000") {
+                            handleLoginSuccess(res);
+                        } else {
+                            alert("登录失败，请检查用户名和密码。");
+                        }
+                    },
+                    error: function() {
+                        alert("请求失败，请稍后重试。");
+                    }
+                });
+            });
+        });
+
+        function handleLoginSuccess(res) {
+            alert("登录成功！");
+            localStorage.setItem("token",res.token)
+            localStorage.setItem("username",res.username)
+            //console.log(localStorage.getItem("token"))
+            location.href = "index.html";
+        }
+
+
     </script>
 
 </div>
