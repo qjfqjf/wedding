@@ -5,6 +5,7 @@ package cn.wedding.config;
 import cn.wedding.shiro.JwtDefaultSubjectFactory;
 import cn.wedding.shiro.JwtRealm;
 import cn.wedding.shiro.filter.JwtFilter;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SubjectFactory;
@@ -57,6 +58,13 @@ public class ShiroConfig {
     }
 
     @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashIterations(2);
+        return hashedCredentialsMatcher;
+    }
+    @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager());
@@ -77,6 +85,7 @@ public class ShiroConfig {
         // 拦截器
         Map<String, String> filterRuleMap = new LinkedHashMap<>();
         filterRuleMap.put("/login", "anon");
+        filterRuleMap.put("/register", "anon");
         filterRuleMap.put("/logout", "logout");
         filterRuleMap.put("/**", "jwt");
         shiroFilter.setFilterChainDefinitionMap(filterRuleMap);
