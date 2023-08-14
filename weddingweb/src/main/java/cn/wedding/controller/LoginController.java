@@ -3,6 +3,7 @@ package cn.wedding.controller;
 
 import cn.wedding.dao.UserDao;
 import cn.wedding.pojo.User;
+import cn.wedding.pojo.vo.UserRegisterVo;
 import cn.wedding.util.JwtUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -46,14 +47,14 @@ public class LoginController {
 
     //shiro加持的注册方法
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(String username,String password) {
+    public ResponseEntity<Map<String, String>> register(@RequestBody UserRegisterVo userRegisterVo) {
         //先取得用户的名字，密码，这两个是画面传进来的参数，放在User里
-        String name = HtmlUtils.htmlEscape(username);
+        String name = HtmlUtils.htmlEscape(userRegisterVo.getUsername());
         Map<String, String> map = new HashMap<>();
         //判断用户名是否已经存在，如果已存在，那就返回错误信息
         User user1 = userDao.selectOne(new LambdaQueryWrapper<User>().eq(User::getUserName, name));
         if(user1!=null){
-            map.put("msg", "用户名密码错误");
+            map.put("msg", "用户名已经注册！！！");
             return ResponseEntity.ok(map);
         }
         //SecureRandomNumberGenerator类随机方法创建盐，进行两次加密，加密算法用md5
@@ -61,14 +62,14 @@ public class LoginController {
         int times = 2;
         String algorithmName = "md5";
         //SimpleHash类使用md5加密算法加密两次，把盐加进去，生成新的密码
-        String encodedPassword = new SimpleHash(algorithmName, password, salt, times).toString();
+        String encodedPassword = new SimpleHash(algorithmName, userRegisterVo.getPassword(), salt, times).toString();
         //把盐和生成的加密密码，存到数据库里
         User user = new User();
         user.setUserName(name);
         user.setSalt(salt);
         user.setPassword(encodedPassword);
         userDao.insert(user);
-        map.put("msg", "注册成功");
+        map.put("msg", "注册成功！！！");
         return ResponseEntity.ok(map);
     }
 
