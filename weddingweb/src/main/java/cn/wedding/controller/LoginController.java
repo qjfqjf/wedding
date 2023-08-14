@@ -73,6 +73,8 @@ public class LoginController {
         //System.out.println(redisUtil.get("token"));
         map.put("msg", "登录成功");
         map.put("token", jwtToken);
+        map.put("code","20000");
+        map.put("username",username);
         return ResponseEntity.ok(map);
     }
     @GetMapping("/testdemo")
