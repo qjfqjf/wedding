@@ -102,7 +102,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td height="34"  valign="bottom" class="logintext1">手机号</td>
+                        <td height="34"  valign="bottom" class="logintext1">姓名</td>
                     </tr>
                     <tr>
                         <td height="40"  valign="top">
@@ -172,6 +172,82 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#regForm").submit(function (event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+                // 获取表单中的数据
+                var uname = $("#uname").val();
+                var passwd = $("#passwd").val();
+                var confirm_password = $("#confirm_password").val();
+                var validatecode = $("#validatecode").val();
+                var smscaptcha = $("#smscaptcha").val();
+
+                // 验证密码和确认密码是否一致
+                if (passwd !== confirm_password) {
+                    alert("密码和确认密码不一致，请重新输入。");
+                    return; // 终止提交
+                }
+
+                // 验证输入框是否为空
+                // if (!uname || !passwd || !confirm_password || !validatecode || !smscaptcha) {
+                //     alert("请填写所有必填字段。");
+                //     return; // 终止提交
+                // }
+                if (!uname || !passwd || !confirm_password) {
+                    alert("请填写所有必填字段。");
+                    return; // 终止提交
+                }
+
+                // 获取表单中的数据
+                var formData = {
+                    username: uname,
+                    password: passwd,
+                    //验证码和手机验证码
+                    // validatecode: $("#validatecode").val(),
+                    // smscaptcha: $("#smscaptcha").val()
+                };
+
+                // 将数据转成 JSON 格式
+                var jsonData = JSON.stringify(formData);
+
+                // 发送 AJAX 请求
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8082/register", // 替换为你的后端接口地址
+                    data: jsonData,
+                    contentType: "application/json", // 指定发送的数据为 JSON 格式
+                    success: function (response) {
+                        console.log(response)
+                        if(response.msg=="注册成功！！！"){
+                            // 处理成功响应
+                            console.log("Registration successful:", response);
+                            // 进行其他操作，如跳转页面等
+                            window.location.href = "login/login.html"; // 注册成功，跳转到 login.html
+                            // 清空表单中的数据
+                            $("#uname").val("");  // 清空用户名输入框
+                            $("#passwd").val("");  // 清空密码输入框
+                            $("#confirm_password").val("");  // 清空确认密码输入框
+                            $("#validatecode").val("");  // 清空验证码输入框
+                            $("#smscaptcha").val("");  // 清空手机验证码输入框
+                            return;
+                        };
+                        if(response.msg=="用户名已经注册！！！"){
+                            // 处理错误响应
+                            alert(response.msg); // 注册失败，弹出警告信息
+                            return;
+                        }
+                        alert("注册失败，请检查输入信息并重试。"); // 注册失败，弹出警告信息
+                    },
+                    error: function (error) {
+                        // 处理错误响应
+                        console.error("Registration error:", error);
+                        alert("注册失败，请检查输入信息并重试。"); // 注册失败，弹出警告信息
+                    }
+                });
+            });
+        });
     </script>
 
 </div>
