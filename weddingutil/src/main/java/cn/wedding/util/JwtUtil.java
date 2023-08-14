@@ -103,19 +103,19 @@ public class JwtUtil {
         return true;
     }
 
-    public static void main(String[] args) {
-        JwtUtil util = new JwtUtil("tom", SignatureAlgorithm.HS256);
-        //以tom作为秘钥，以HS256加密
-        Map<String, Object> map = new HashMap<>();
-        map.put("username", "tom");
-        map.put("password", "123456");
-        map.put("age", 20);
-
-        String jwtToken = util.encode("tom", 30000, map);
-
-        System.out.println(jwtToken);
-        util.decode(jwtToken).entrySet().forEach((entry) -> {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        });
-    }
+//    public static void main(String[] args) {
+//        JwtUtil util = new JwtUtil("tom", SignatureAlgorithm.HS256);
+//        //以tom作为秘钥，以HS256加密
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("username", "tom");
+//        map.put("password", "123456");
+//        map.put("age", 20);
+//
+//        String jwtToken = util.encode("tom", 30000, map);
+//
+//        System.out.println(jwtToken);
+//        util.decode(jwtToken).entrySet().forEach((entry) -> {
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        });
+//    }
 }

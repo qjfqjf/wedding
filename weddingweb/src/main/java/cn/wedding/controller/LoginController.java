@@ -5,17 +5,20 @@ import cn.wedding.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 @Slf4j
-@Controller
+@RestController
 public class LoginController {
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(String username, String password) {
-        log.info("username:{},password:{}",username,password);
+        System.out.println("username:"+username+"password"+password);
         Map<String, String> map = new HashMap<>();
         if (!"tom".equals(username) || !"123".equals(password)) {
             map.put("msg", "用户名密码错误");
