@@ -1,7 +1,5 @@
 package cn.wedding.config;
 
-
-
 import cn.wedding.shiro.JwtDefaultSubjectFactory;
 import cn.wedding.shiro.JwtRealm;
 import cn.wedding.shiro.filter.JwtFilter;

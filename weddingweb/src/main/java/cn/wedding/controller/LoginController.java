@@ -1,34 +1,66 @@
 package cn.wedding.controller;
 
 
+import cn.wedding.biz.UserBiz;
 import cn.wedding.dao.UserDao;
 import cn.wedding.pojo.User;
 import cn.wedding.pojo.vo.UserRegisterVo;
 import cn.wedding.util.JwtUtil;
+import cn.wedding.util.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 @Slf4j
 @RestController
 public class LoginController {
     @Autowired
+    private UserBiz userBiz;
+
+    @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(String username, String password) {
 
-        System.out.println("username:"+username+"   "+"password"+password);
+        //避免非空
+        Optional<String> nameOptional = Optional.ofNullable(username);
+        Optional<String> passwordOptional = Optional.ofNullable(password);
+
+        //构建条件构造器
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new QueryWrapper<User>().lambda();
+        AtomicBoolean isSuccess = new AtomicBoolean(false);
+        nameOptional.ifPresent(name -> {
+            lambdaQueryWrapper.eq(User::getUserName,name);
+            //因为加了盐，所以先通过唯一索引（用户名）来查询一下数据库中的盐值
+            User user = userBiz.getOne(lambdaQueryWrapper);
+            Optional<String> saltOptional = Optional.ofNullable(user.getSalt());
+            //用盐加密密码
+            int times = 2;
+            String algorithmName = "md5";
+            //SimpleHash类使用md5加密算法加密两次，把盐加进去，生成新的密码
+            saltOptional.ifPresent(salt -> passwordOptional.ifPresent(pass -> {
+                isSuccess.set(user.getPassword().equals(new SimpleHash(algorithmName, pass, salt, times).toString()));
+            }));
+        });
+
         Map<String, String> map = new HashMap<>();
-        if (!"tom".equals(username) || !"123".equals(password)) {
+        System.out.println(isSuccess.get());
+        if (!isSuccess.get()) {
             map.put("msg", "用户名密码错误");
             return ResponseEntity.ok(map);
         }
@@ -36,6 +68,9 @@ public class LoginController {
         Map<String, Object> chaim = new HashMap<>();
         chaim.put("username", username);
         String jwtToken = jwtUtil.encode(username, 60 * 60 * 1000, chaim);
+        redisUtil.set("token",jwtToken,(long)60 * 60 * 1000);
+        //测试
+        //System.out.println(redisUtil.get("token"));
         map.put("msg", "登录成功");
         map.put("token", jwtToken);
         return ResponseEntity.ok(map);
