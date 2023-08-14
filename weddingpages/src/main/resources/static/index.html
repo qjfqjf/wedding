@@ -58,7 +58,7 @@
 
       <div class="login" id="userstatus" style="display: flex">
         <div v-if="isLoggedIn">欢迎，{{ username }}</div>
-        <a v-if="isLoggedIn" @click="logout" style="margin-left: 20px">退出</a>
+        <div v-if="isLoggedIn" @click="logout" style="margin-left: 20px">退出</div>
         <a v-if="!isLoggedIn" href="login/login.html">登录</a>
         <a v-if="!isLoggedIn" href="login/register.html" style="margin-left: 20px">注册</a>
       </div>
@@ -869,6 +869,7 @@
       logout(){
         localStorage.clear();
         this.isLoggedIn = false;
+        alert("退出成功")
       },
       //检查token是否过期
       checkLoginStatus() {
