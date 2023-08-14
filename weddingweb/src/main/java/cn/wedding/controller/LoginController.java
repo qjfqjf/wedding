@@ -1,20 +1,44 @@
 package cn.wedding.controller;
 
 
+import cn.wedding.biz.UserBiz;
+import cn.wedding.pojo.User;
 import cn.wedding.util.JwtUtil;
+import cn.wedding.util.MD5;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.dynamic.DynamicType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 @Slf4j
 @RestController
 public class LoginController {
-
+    @Autowired
+    private UserBiz userBiz;
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(String username, String password) {
+
+        //避免非空
+        Optional<String> nameOptional = Optional.ofNullable(username);
+        Optional<String> passwordOptional = Optional.ofNullable(password);
+
+        //构建条件构造器
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new QueryWrapper<User>().lambda();
+        nameOptional.ifPresent(name -> {
+            lambdaQueryWrapper.eq(User::getUserName,name);
+            //因为加了盐，所以先通过唯一索引（用户名）来查询一下数据库中的盐值
+            List<User> userlist = userBiz.list(lambdaQueryWrapper);
+            System.out.println(userlist);
+        });
+        //passwordOptional.ifPresent(pass -> lambdaQueryWrapper.eq(User::getUserName, MD5.getSaltMD5(pass)));
 
         System.out.println("username:"+username+"   "+"password"+password);
         Map<String, String> map = new HashMap<>();
